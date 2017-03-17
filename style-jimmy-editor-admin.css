@@ -1,0 +1,18 @@
+/* for post editor */
+div#wp-content-editor-container textarea#content {
+	background-color: #00f !important;
+	color: #ff0 !important;
+	font-family: monospace !important;
+	font-weight: 900 !important;
+	font-size: 1.1em !important;
+}
+
+/* for theme or plugin editor */
+form#template textarea#newcontent {
+	background-color: #00f !important;
+	color: #ff0 !important;
+	font-family: monospace !important;
+	font-weight: 900 !important;
+	font-size: 1.1em !important;
+}
+
