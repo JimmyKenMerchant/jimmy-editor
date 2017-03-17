@@ -646,7 +646,9 @@
 		var $target_area = $("#newcontent");
 	}
 
+	// Second and Third Arguments are X and Y coordinates
+	// Last Argument needs unique number except 0
 	lines_box($target_area, 500, 500, 1);
-	search_box($target_area, 550,550, 2);
+	search_box($target_area, 550, 550, 2);
 
 })(jQuery);

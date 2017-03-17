@@ -14,9 +14,10 @@ License: GPL2 or Later
 /*
  * post-editor patch in admin pages
  * To be able to use tab indent in post-editors (Text mode)
- * admin_print_footer_scripts is a suitable hook. some $hook_suffix may be changed by language
- * wp_enqueue_script where deps as array( 'jquery' ) is good just on normal wp pages (wp_enqueue_scripts)
- * In admin pages, jQuery needs echo just as below
+ *
+ * admin_print_footer_scripts is a suitable hook. some $hook_suffix may be changed by language.
+ * In my experience, wp_enqueue_script where deps as array( 'jquery' ) was wrong for adding JavaScript with jQuery
+ * on both normal pages and admin pages. Your JavaScript with jQuery needs echo just as below.
  */
 function jimmy_admin_editor() {
 	// The Fourth argument makes Version Information. True Makes "1", false makes actual Version, null makes nothing
