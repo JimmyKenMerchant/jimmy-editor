@@ -6,6 +6,10 @@
  */
 (function($) {
 
+	/*
+	 * lines Box Construction
+	 * Line and Number Detection and Search
+	 */
 	function lines_box($target_area, x_pos, y_pos, order_num) {
 		// Common
 		$target_area.attr({
@@ -22,6 +26,7 @@
 			.css({
 				"visibility": "hidden",
 				"display": "block",
+				"opacity": "0.8",
 				"position": "fixed",
 				"margin": "0",
 				"padding": "0",
@@ -31,8 +36,8 @@
 				"width": "6.0rem",
 				"height": "auto",
 				"text-align": "left",
-				"background-color": "rgba(0, 255, 255, 0.6)",
-				"color": "rgba(0, 0, 0, 0.8)",
+				"background-color": "#0ff",
+				"color": "#000",
 				"transition": "top 0.2s, left 0.2s"
 				}
 			);
@@ -49,14 +54,14 @@
 				"text-align": "center",
 				"width": "6.0rem",
 				"height": "1.5rem",
-				"background-color": "rgba(255, 0, 255, 0.6)",
+				"background-color": "#f0f",
 				"transition": "background-color 0.5s"
 				}
 			)
 			.click( function() {
 					if (sticker_flag === parseInt(order_num)) {
 						sticker_flag = 0;
-						$(".the-stickers").css("background-color","rgba(255, 0, 255, 0.6)");
+						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
 									"border-left": "1.0em solid transparent"
@@ -64,16 +69,16 @@
 						return false;
 					} else {
 						sticker_flag = parseInt(order_num);
-						$(".the-stickers").css("background-color","rgba(255, 0, 255, 0.6)");
+						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
 									"border-left": "1.0em solid transparent"
 								});
-						$(this).css("background-color","rgba(255, 255, 0, 0.6)");
+						$(this).css("background-color", "#ff0");
 						$(this).children("div")
 								.css({
-									"border-right": "1.0em solid rgba(255, 255, 0, 0.6)",
-									"border-left": "1.0em solid rgba(255, 255, 0, 0.6)"
+									"border-right": "1.0em solid #0ff",
+									"border-left": "1.0em solid #0ff"
 								});
 						return false;
 					}
@@ -86,12 +91,12 @@
 						}
 			)
 			.bind('mouseenter', function(e) {
-							$(this).css("background-color", "rgba(255, 255, 0, 0.6)");
+							$(this).css("background-color", "#ff0");
 							return false;
 						}
 			)
 			.bind('mouseleave', function(e) {
-							$(this).css("background-color", "rgba(255, 0, 255, 0.6)");
+							$(this).css("background-color", "#f0f");
 							return false;
 						}
 			);
@@ -109,7 +114,7 @@
 				"height": "0",
 				"margin": "0",
 				"padding": "0",
-				"border-top": "2.0em solid rgba(255, 255, 0, 0.6)",
+				"border-top": "2.0em solid #0ff",
 				"border-right": "1.0em solid transparent",
 				"border-left": "1.0em solid transparent",
 				"transition": "border-right 0.5s, border-left 0.5s"
@@ -128,13 +133,13 @@
 				"text-align": "center",
 				"font-size": "1.5rem",
 				"white-space": "pre",
-				"background-color": "rgba(0, 255, 255, 0.6)",
-				"color": "rgba(0, 0, 0, 0.8)"
+				"background-color": "#aff",
+				"color": "#000"
 				}
 			)
 			.click( function() {
 					sticker_flag = 0;
-					$(".the-stickers").css("background-color","rgba(255, 0, 255, 0.6)");
+					$(".the-stickers").css("background-color", "#f0f");
 					$(".the-pins").css({
 							"border-right": "1.0em solid transparent",
 							"border-left": "1.0em solid transparent"
@@ -156,17 +161,17 @@
 				"font-weight": "bold",
 				"width": "2.0rem",
 				"height": "2.0rem",
-				"background-color": "rgba(255, 255, 0, 0.6)",
-				"color": "rgba(0, 0, 0, 0.8)"
+				"background-color": "#ff0",
+				"color": "#000"
 				}
 			)
 			.bind('mouseenter', function(e) {
-							$(this).css("background-color", "rgba(0, 255, 255, 0.6)");
+							$(this).css("background-color", "#0ff");
 							return false;
 						}
 			)
 			.bind('mouseleave', function(e) {
-							$(this).css("background-color", "rgba(255, 255, 0, 0.6)");
+							$(this).css("background-color", "#ff0");
 							return false;
 						}
 			)
@@ -187,8 +192,8 @@
 					"padding": "0",
 					"width": "4.0rem",
 					"height": "2.0rem",
-					"background-color": "rgba(255, 255, 255, 0.6)",
-					"color": "rgba(0, 0, 0, 0.8)"
+					"background-color": "#fff",
+					"color": "#000"
 					}
 				)
 				.click( function() {
@@ -259,7 +264,7 @@
 		$('body').bind('mousemove.jimmy-editor_lines', function(e) {
 	
 			if (sticker_flag === parseInt(order_num)) {
-				// Add Border Width	
+				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#lines-box").css({
 						"left": e.clientX - 4 + "px",
 						"top": e.clientY - 4 + "px"
@@ -269,6 +274,10 @@
 		});
 	}
 
+	/*
+	 * Search Box Construction
+	 * Search, Replace or Delete Word
+	 */
 	function search_box($target_area, x_pos, y_pos, order_num) {
 		// Common
 		$target_area.attr({
@@ -285,6 +294,7 @@
 			.css({
 				"visibility": "hidden",
 				"display": "block",
+				"opacity": "0.8",
 				"position": "fixed",
 				"margin": "0",
 				"padding": "0",
@@ -294,8 +304,8 @@
 				"width": "6.0rem",
 				"height": "auto",
 				"text-align": "left",
-				"background-color": "rgba(0, 255, 255, 0.6)",
-				"color": "rgba(0, 0, 0, 0.8)",
+				"background-color": "#0ff",
+				"color": "#000",
 				"transition": "top 0.2s, left 0.2s"
 				}
 			);
@@ -312,31 +322,31 @@
 				"text-align": "center",
 				"width": "6.0rem",
 				"height": "1.5rem",
-				"background-color": "rgba(255, 0, 255, 0.6)",
+				"background-color": "#f0f",
 				"transition": "background-color 0.5s"
 				}
 			)
 			.click( function() {
 					if (sticker_flag === parseInt(order_num)) {
 						sticker_flag = 0;
-						$(".the-stickers").css("background-color","rgba(255, 0, 255, 0.6)");
+						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
 									"border-left": "1.0em solid transparent"
 								});
 						return false;
 					} else {
-						$(".the-stickers").css("background-color","rgba(255, 0, 255, 0.6)");
+						sticker_flag = parseInt(order_num);
+						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
 									"border-left": "1.0em solid transparent"
 								});
-						sticker_flag = parseInt(order_num);
-						$(this).css("background-color","rgba(255, 255, 0, 0.6)");
+						$(this).css("background-color", "#ff0");
 						$(this).children("div")
 								.css({
-									"border-right": "1.0em solid rgba(255, 255, 0, 0.6)",
-									"border-left": "1.0em solid rgba(255, 255, 0, 0.6)"
+									"border-right": "1.0em solid #0ff",
+									"border-left": "1.0em solid #0ff"
 								});
 						return false;
 					}
@@ -349,16 +359,15 @@
 						}
 			)
 			.bind('mouseenter', function(e) {
-							$(this).css("background-color", "rgba(255, 255, 0, 0.6)");
+							$(this).css("background-color", "#ff0");
 							return false;
 						}
 			)
 			.bind('mouseleave', function(e) {
-							$(this).css("background-color", "rgba(255, 0, 255, 0.6)");
+							$(this).css("background-color", "#f0f");
 							return false;
 						}
 			);
-
 
 		$("<div>").appendTo($("#search-sticker"))
 			.attr({
@@ -373,7 +382,7 @@
 				"height": "0",
 				"margin": "0",
 				"padding": "0",
-				"border-top": "2.0em solid rgba(255, 255, 0, 0.6)",
+				"border-top": "2.0em solid #0ff",
 				"border-right": "1.0em solid transparent",
 				"border-left": "1.0em solid transparent",
 				"transition": "border-right 0.5s, border-left 0.5s"
@@ -392,13 +401,13 @@
 				"text-align": "center",
 				"font-size": "1.5rem",
 				"white-space": "pre",
-				"background-color": "rgba(0, 255, 255, 0.6)",
-				"color": "rgba(0, 0, 0, 0.8)"
+				"background-color": "#aff",
+				"color": "#000"
 				}
 			)
 			.click( function() {
 					sticker_flag = 0;
-					$(".the-stickers").css("background-color","rgba(255, 0, 255, 0.6)");
+					$(".the-stickers").css("background-color", "#f0f");
 					$(".the-pins").css({
 							"border-right": "1.0em solid transparent",
 							"border-left": "1.0em solid transparent"
@@ -421,8 +430,8 @@
 				"text-align": "center",
 				"font-size": "1.0rem",
 				"white-space": "pre",
-				"background-color": "rgba(255, 255, 0, 0.6)",
-				"color": "rgba(255, 0, 0, 0.8)"
+				"background-color": "#ff0",
+				"color": "#f00"
 				}
 			)
 			.click( function() {
@@ -431,7 +440,7 @@
 						$("#search-text").text("Replace");
 					} else if (select_flag === 1) {
 						select_flag = 2;
-						$("#search-text").text("Deleate");
+						$("#search-text").text("Delete");
 					} else if (select_flag === 2) {
 						select_flag = 0;
 						$("#search-text").text("Search");
@@ -439,12 +448,12 @@
 				}
 			)
 			.bind('mouseenter', function(e) {
-							$(this).css("background-color", "rgba(0, 255, 255, 0.6)");
+							$(this).css("background-color", "#0ff");
 							return false;
 						}
 			)
 			.bind('mouseleave', function(e) {
-							$(this).css("background-color", "rgba(255, 255, 0, 0.6)");
+							$(this).css("background-color", "#ff0");
 							return false;
 						}
 			).text("Select");
@@ -465,8 +474,8 @@
 					"padding": "0",
 					"width": "6.0rem",
 					"height": "2.0rem",
-					"background-color": "rgba(255, 255, 255, 0.6)",
-					"color": "rgba(0, 0, 0, 0.8)"
+					"background-color": "#fff",
+					"color": "#000"
 					}
 				)
 				.click( function() {
@@ -491,8 +500,8 @@
 					"padding": "0",
 					"width": "6.0rem",
 					"height": "2.0rem",
-					"background-color": "rgba(255, 255, 255, 0.6)",
-					"color": "rgba(0, 0, 0, 0.8)"
+					"background-color": "#fff",
+					"color": "#000"
 					}
 				)
 				.click( function() {
@@ -512,17 +521,17 @@
 				"font-weight": "bold",
 				"width": "6.0rem",
 				"height": "2.0rem",
-				"background-color": "rgba(255, 255, 0, 0.6)",
-				"color": "rgba(0, 0, 0, 0.8)"
+				"background-color": "#ff0",
+				"color": "#000"
 				}
 			)
 			.bind('mouseenter', function(e) {
-							$(this).css("background-color", "rgba(0, 255, 255, 0.6)");
+							$(this).css("background-color", "#0ff");
 							return false;
 						}
 			)
 			.bind('mouseleave', function(e) {
-							$(this).css("background-color", "rgba(255, 255, 0, 0.6)");
+							$(this).css("background-color", "#ff0");
 							return false;
 						}
 			)
@@ -627,7 +636,7 @@
 		$('body').bind('mousemove.jimmy-editor_search', function(e) {
 	
 			if (sticker_flag === parseInt(order_num)) {
-				// Add Border Width
+				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#search-box").css({
 						"left": e.clientX - 4 + "px",
 						"top": e.clientY - 4 + "px"
