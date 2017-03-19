@@ -2,7 +2,7 @@
 Contributors: Kenta Ishii, Tokyo
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Version: 0.9 Beta
+Version: 0.9.1 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -10,6 +10,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Jimmy Editor is a plugin for patching default editors of WordPress. This Plugin's beginning was from my thought, how I can use the tab key to insert a indent on Post Editor (Text Mode). This is resolved by "post-editor-patch.js". Secondly, I tried to make some editorial functions; search, replace and delete. In addition, considered movable interfaces on Browsers. I named my challenge to "Sticker Box". It's not only like the window system on your PC, but able to work on your Tablet or Phone. I can say this challenge is making compatibility between mouse pointers and touching devices. Plus, I changed style of editors. Now It can be able to change background-color, color and font parameters. Multiple <textarea> tags with same name seems to make array on the name. It's just a hint to a multiple colored web editor.
 Browser Base Application (Web Apps) has a good key to the future because its compatibility has better than Computer Base Application. If You make one Web App, your Web App works on a browser in every platform. It's ideal — many developers are trying this, then finding some issues — and Browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in Computer. Besides, Computer has big memory and good speed these days. It's time to open the door to the future by Web Apps.
+
+== Tutorial ==
+
+Touch or click Magenta Label on Sticker, then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Light Cyan Label is its text, and if you click it, Sticker will hidden from your display temporary. You can reshow Sticker by click your editor area. White Label is a input area where you can write parameters to Function on Sticker. Yellow Label is a button to command Function.
 
 == Installation ==
 
@@ -31,6 +35,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 0.9.1 Beta =
+* Added Font | Back-ground Style Changer: March 19, 2017
 
 = 0.9 Beta =
 * Beta Release: March 17, 2017

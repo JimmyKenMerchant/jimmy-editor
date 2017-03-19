@@ -1,18 +1,18 @@
-/* for post editor */
+/* Default for post editor */
 div#wp-content-editor-container textarea#content {
-	background-color: #00f !important;
-	color: #ff0 !important;
-	font-family: monospace !important;
-	font-weight: 900 !important;
-	font-size: 1.1em !important;
+	background-color: #00f;
+	color: #fff;
+	font-family: monospace;
+	font-weight: 900;
+	font-size: 1.1em;
 }
 
-/* for theme or plugin editor */
+/* Default for theme or plugin editor */
 form#template textarea#newcontent {
-	background-color: #00f !important;
-	color: #ff0 !important;
-	font-family: monospace !important;
-	font-weight: 900 !important;
-	font-size: 1.1em !important;
+	background-color: #00f;
+	color: #fff;
+	font-family: monospace;
+	font-weight: 900;
+	font-size: 1.1em;
 }
 

@@ -5,7 +5,7 @@ Plugin URI: http://jimmykenmerchant.com
 Description: Post Editor Patch
 Author: Kenta Ishii
 Author URI: http://jimmykenmerchant.com
-Version: 0.9 Beta
+Version: 0.9.1 Beta
 Text Domain: jimmy-editor
 Domain Path: /languages
 License: GPL2 or Later
