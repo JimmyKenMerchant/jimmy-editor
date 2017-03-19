@@ -37,7 +37,9 @@ GNU General Public License for more details.
 == Changelog ==
 
 = 0.9.1 Beta =
-* Added Font | Back-ground Style Changer: March 19, 2017
+* Added Font | Background-color Style Changer
+* On FireFox (PC) Worked
+: March 19, 2017
 
 = 0.9 Beta =
 * Beta Release: March 17, 2017
