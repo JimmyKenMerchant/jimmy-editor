@@ -13,7 +13,41 @@ Browser Base Application (Web Apps) has a good key to the future because its com
 
 == Tutorial ==
 
-Touch or click Magenta Label on Sticker, then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Light Cyan Label is its text, and if you click it, Sticker will hidden from your display temporary. You can reshow Sticker by click your editor area. White Label is a input area where you can write parameters to Function on Sticker. Yellow Label is a button to command Function.
+1. General
+
+Touch or click Magenta Label on Sticker, then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Stick it where you want, by touching or clicking Magenta Label again. Light Cyan Label is its text, and if you touch or click it, Sticker will hidden from your display temporary. You can reshow Sticker by touch or click your editor area. White Label is a input area where you can write parameters to Function on Sticker. Yellow Label is a button to command Function.
+
+2. Line Box
+
+Touch or click your editor area, then you can know how many lines and/or numbers the caret in your editor is placed on. Type lines and/or numbers on White Label and touch or click "Go" or press Enter so that your caret moves where you want. e.g. typing "20:6" means your caret moves to the 20th line and the 6th word. Typing "3" means your caret moves to the 3rd line and its beginning.
+
+Touch or click "Top" to take your caret to the top of your editor area.
+
+Touch or click "Last" to take your caret to the bottom of your editor area.
+
+3. Search Box
+
+Change Command by touching or cliking "Select" which toggles "Search", "Replace", "Delete".
+
+On "Search": Type your search word on the "Search?" White Label.
+
+On "Replace": Type your target word on the "Search?" White Label, your demand word on the "Replace?".
+
+On "Delete": Type your target word on the "Search?" White Label, make sure to empty on the "Replace?".
+
+Then touch or click "Go" or press Enter.
+
+If "Back" is active, you can undo these commands. "Back" is only 5 times because of saving memory loading. If you click or touch your editor area, "Back" is deactivated and cleaned past activities.
+
+4. Style Box
+
+Each current status is indicated on White Label. The top is font color, the middle is font size and font weight, the bottom is background color.
+
+On Top and Bottom: Type color code by Hexadecimal style (e.g. "#89abcd") or just as displayed (e.g. "rgb(123,213,132)") to change font and background color.
+
+On Middle: Type font size and font weight. Connect these by colon. e.g. "14px:bold" means font size will be 14px and font weight will be bold. Typing "14px" means font size will be 14px and font weight will not be changed. Typing ":400" means font size will not be changed and font weight will be 400.
+
+Then touch or click "Change" or press Enter.
 
 == Installation ==
 

@@ -1,2 +1,2 @@
 <?php
-/* To not to show file index */
+/* Not to show file index */

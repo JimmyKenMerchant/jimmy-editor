@@ -59,8 +59,8 @@
 				}
 			)
 			.click( function() {
-					if (sticker_flag === parseInt(order_num)) {
-						sticker_flag = 0;
+					if (g_sticker_flag === parseInt(order_num)) {
+						g_sticker_flag = 0;
 						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
@@ -68,7 +68,7 @@
 								});
 						return false;
 					} else {
-						sticker_flag = parseInt(order_num);
+						g_sticker_flag = parseInt(order_num);
 						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
@@ -138,14 +138,14 @@
 				}
 			)
 			.click( function() {
-					sticker_flag = 0;
+					g_sticker_flag = 0;
 					$(".the-stickers").css("background-color", "#f0f");
 					$(".the-pins").css({
 							"border-right": "1.0em solid transparent",
 							"border-left": "1.0em solid transparent"
 							});
 					$("#lines-box").css("visibility", "hidden");
-					$target_area.focus();
+					$target_area[0].focus();
 				}
 			)
 			.text("");
@@ -262,14 +262,14 @@
 		$target_area.bind('click.jimmy-editor_lines_showbox', function(e) {
 	
 			var el = e.target;
-			var selStart = el.selectionStart;
+			var sel_start = el.selectionStart;
 			var val = el.value;
 	
-			var the_cal = val.substr(0, selStart).split("\n");
-			var the_lines = the_cal.length;
-			var the_num = the_cal[ the_cal.length - 1 ].length;
+			var cal = val.substr(0, sel_start).split("\n");
+			var lines_n = cal.length;
+			var num_n = cal[ cal.length - 1 ].length;
 	
-			$("#lines-text").text("L: " + the_lines + "\r\n" + "N: " + the_num);
+			$("#lines-text").text("L: " + lines_n + "\r\n" + "N: " + num_n);
 	
 			$("#lines-box").css("visibility", "visible");
 
@@ -277,44 +277,61 @@
 		});
 	
 		$('#lines-button1').bind('click.jimmy-editor_lines', function(e) {
-	
-			var the_val = $('#lines-input').val();
-			if(the_val == parseInt(the_val)) {
-				var the_lines = parseInt(the_val) - 1;
-				var the_num = 0;
+			var val_input = $('#lines-input').val();
+			if(val_input == parseInt(val_input)) {
+				var lines_n = parseInt(val_input) - 1;
+				var num_n = 0;
 			} else {
-				the_val = the_val.split(":", 2);
-				var the_lines = parseInt(the_val[0]) - 1;
-				var the_num = parseInt(the_val[1]);
+				val_input = val_input.split(":", 2);
+				if (val_input[0] === "" || val_input[1] === "") {
+					return false;
+				} else {
+					var lines_n = parseInt(val_input[0]) - 1;
+					var num_n = parseInt(val_input[1]);
+				}
 			}
 	
 			$('#lines-input').val("L:N?");
 			var val = $target_area[0].value;
-			var the_cal = val.substr(0).split("\n");
-			var the_dest = 0;
-			for(var i=0; i < the_lines; i++){
-				the_dest += the_cal[i].length + 1;
+			var cal = val.substr(0).split("\n");
+
+			// If lines is overflowed length of text
+			var ck_length = lines_n + 1;
+			if(cal.length < ck_length) {
+				return false;
 			}
-			the_dest += the_num;
-			if(the_dest > val.length) {
-				the_dest = 0;
+			// If number is overflowed length of line
+			if(cal[lines_n].length < num_n) {
+				num_n = cal[lines_n].length;
 			}
-			$target_area[0].selectionStart = the_dest;
-			$target_area[0].selectionEnd = the_dest + 1;
-			$target_area.focus();
+
+			var dest = 0;
+			for(var i=0; i < lines_n; i++){
+				dest += cal[i].length + 1;
+			}
+
+			dest += num_n;
+			$target_area[0].selectionStart = dest;
+			$target_area[0].selectionEnd = dest;
+
+			// Needs to refocus to correct siting particular in post editor
+			$('#lines-input').focus();
+			$target_area[0].focus();
 	
-			the_lines++;
+			lines_n++;
 	
-			$("#lines-text").text("L: " + the_lines + "\r\n" + "N: " + the_num);
+			$("#lines-text").text("L: " + lines_n + "\r\n" + "N: " + num_n);
 
 			return false;
 		});
 
 		$('#lines-button2').bind('click.jimmy-editor_top', function(e) {
-	
 			$target_area[0].selectionStart = 0;
-			$target_area[0].selectionEnd = 1;
-			$target_area.focus();
+			$target_area[0].selectionEnd = 0;
+
+			// Needs to refocus to correct siting particular in post editor
+			$('#lines-input').focus();
+			$target_area[0].focus();
 
 			$("#lines-text").text("L: " + 1 + "\r\n" + "N: " + 0);
 
@@ -322,14 +339,16 @@
 		});
 
 		$('#lines-button3').bind('click.jimmy-editor_last', function(e) {
-
 			var val = $target_area[0].value;	
-			$target_area[0].selectionStart = val.length - 1;
+			$target_area[0].selectionStart = val.length;
 			$target_area[0].selectionEnd = val.length;
-			$target_area.focus();
 
-			var the_cal = val.substr(0).split("\n");
-			$("#lines-text").text("L: " + the_cal.length + "\r\n" + "N: " + the_cal[the_cal.length - 1].length);
+			// Needs to refocus to correct siting particular in post editor
+			$('#lines-input').focus();
+			$target_area[0].focus();
+
+			var cal = val.substr(0).split("\n");
+			$("#lines-text").text("L: " + cal.length + "\r\n" + "N: " + cal[cal.length - 1].length);
 
 			return false;
 		});
@@ -344,7 +363,7 @@
 	
 		$('body').bind('mousemove.jimmy-editor_lines', function(e) {
 	
-			if (sticker_flag === parseInt(order_num)) {
+			if (g_sticker_flag === parseInt(order_num)) {
 				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#lines-box").css({
 						"left": e.clientX - 4 + "px",
@@ -408,8 +427,8 @@
 				}
 			)
 			.click( function() {
-					if (sticker_flag === parseInt(order_num)) {
-						sticker_flag = 0;
+					if (g_sticker_flag === parseInt(order_num)) {
+						g_sticker_flag = 0;
 						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
@@ -417,7 +436,7 @@
 								});
 						return false;
 					} else {
-						sticker_flag = parseInt(order_num);
+						g_sticker_flag = parseInt(order_num);
 						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
@@ -487,19 +506,19 @@
 				}
 			)
 			.click( function() {
-					sticker_flag = 0;
+					g_sticker_flag = 0;
 					$(".the-stickers").css("background-color", "#f0f");
 					$(".the-pins").css({
 							"border-right": "1.0em solid transparent",
 							"border-left": "1.0em solid transparent"
 							});
 					$("#search-box").css("visibility", "hidden");
-					$target_area.focus();
+					$target_area[0].focus();
 				}
 			)
 			.text("Search");
 
-		var select_flag = 0;
+		var the_select_flag = 0;
 		$("<div>").appendTo($("#search-box"))
 			.attr("id", "search-button1")
 			.css({
@@ -516,14 +535,14 @@
 				}
 			)
 			.click( function() {
-					if (select_flag === 0) {
-						select_flag = 1;
+					if (the_select_flag === 0) {
+						the_select_flag = 1;
 						$("#search-text").text("Replace");
-					} else if (select_flag === 1) {
-						select_flag = 2;
+					} else if (the_select_flag === 1) {
+						the_select_flag = 2;
 						$("#search-text").text("Delete");
-					} else if (select_flag === 2) {
-						select_flag = 0;
+					} else if (the_select_flag === 2) {
+						the_select_flag = 0;
 						$("#search-text").text("Search");
 					}
 				}
@@ -600,7 +619,7 @@
 				"text-align": "center",
 				"font-size": "1.0rem",
 				"font-weight": "bold",
-				"width": "6.0rem",
+				"width": "3.0rem",
 				"height": "2.0rem",
 				"background-color": "#ff0",
 				"color": "#000",
@@ -619,95 +638,193 @@
 			)
 			.text("Go");
 
-		// Variable the_nextstart uses for search/replace/delete
-		var the_nextstart = 0;
+		var the_bt3_backcol_hover = "#ff0";
+		$("<div>").appendTo($("#search-box"))
+			.attr("id", "search-button3")
+			.css({
+				"display": "inline-block",
+				"vertical-align": "top",
+				"line-height": "1.8rem",
+				"text-align": "center",
+				"font-size": "1.0rem",
+				"font-weight": "bold",
+				"width": "3.0rem",
+				"height": "2.0rem",
+				"background-color": "#ff0",
+				"color": "#ff0",
+				"transition": "background-color 0.5s"
+				}
+			)
+			.bind('mouseenter', function(e) {
+							$(this).css("background-color", the_bt3_backcol_hover);
+							return false;
+						}
+			)
+			.bind('mouseleave', function(e) {
+							$(this).css("background-color", "#ff0");
+							return false;
+						}
+			)
+			.text("Back");
+
 		$target_area.bind('click.jimmy-editor_search_showbox', function(e) {
 			the_nextstart = e.target.selectionStart;
 			$("#search-box").css("visibility", "visible");
+			// Clear Existing Array for back
+			the_past.length = 0;
+			the_bt3_backcol_hover = "#ff0";
+			$("#search-button3").css("color", "#888");
 			return false;	
 		});
 
+		// Variable the_nextstart uses for search/replace/delete
+		var the_nextstart = 0;
 		var the_val_search = "";
 		var the_search_regex = {};
 		var the_val_replace = "";
+		var the_past = [];
 		$('#search-button2').bind('click.jimmy-editor_search', function(e) {
-			the_temp_search = $('#search-input1').val();
-			if (the_val_search !== the_temp_search) {
-				the_val_search = the_temp_search;
+			var temp_search = $('#search-input1').val();
+			if (the_val_search !== temp_search) {
+				the_val_search = temp_search;
 				the_nextstart = $target_area[0].selectionStart;
 			}
-			the_temp_replace = $('#search-input2').val();
-			if (the_val_replace !== the_temp_replace) {
-				the_val_replace = the_temp_replace;
+			var temp_replace = $('#search-input2').val();
+			if (the_val_replace !== temp_replace) {
+				the_val_replace = temp_replace;
+				the_nextstart = $target_area[0].selectionStart;
+			}
+
+			// If Caret is moved after search/replace/delete
+			if (the_nextstart !== $target_area[0].selectionEnd) {
 				the_nextstart = $target_area[0].selectionStart;
 			}
 
 			var val = $target_area[0].value;
 
-			if (the_val_search === "" ) {
-			// Nothing
-				$target_area.focus();
-			} else if (the_val_replace !== "" && select_flag === 1) {
+			if (the_val_replace !== "" && the_select_flag === 1) {
 			// Replace
 				// If you want all replace, RegExp("the_val_search", "g")
-				var the_search_regex = new RegExp(the_val_search);
-				var the_cal = val.substr(the_nextstart).search(the_search_regex);
-				if (the_cal === -1) {
-					$target_area.focus();
+				the_search_regex = new RegExp(the_val_search);
+				var cal = val.substr(the_nextstart).search(the_search_regex);
+				if (cal === -1) {
+					$target_area[0].focus();
 					return false;
 				}
-				the_cal += the_nextstart;
-				var the_slice = the_cal + the_val_search.length;
-				var the_front = val.slice(0, the_cal);
-				var the_rear = val.slice(the_slice);
+				cal += the_nextstart;
+				var slice_p = cal + the_val_search.length;
+				var front_v = val.slice(0, cal);
+				var rear_v = val.slice(slice_p);
 				// Replace Itself
-				$target_area[0].value = the_front + the_val_replace + the_rear;
-				the_nextstart = the_cal + the_val_replace.length;
-				$target_area[0].selectionStart = the_cal;
+				$target_area[0].value = front_v + the_val_replace + rear_v;
+				the_nextstart = cal + the_val_replace.length;
+				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
-				$target_area.focus();
+
+				// Needs to refocus to correct siting particular in post editor
+				$('#search-input1').focus();
+				$target_area[0].focus();
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
-			} else if (the_val_replace === "" && select_flag === 2) {
+
+				// Undo up to 5 times
+				if (the_past.length > 12) {
+					for (var i = 0; i < 3 ; i++) {
+						the_past.shift();
+					}
+				}
+				the_past.push(cal);
+				the_past.push(the_val_search);
+				the_past.push(the_val_replace);
+				the_bt3_backcol_hover = "#0ff";
+				$("#search-button3").css("color", "#000");
+			} else if (the_val_replace === "" && the_select_flag === 2) {
 			// Delete
 				// If you want all delete, RegExp("the_val_search", "g")
-				var the_search_regex = new RegExp(the_val_search);
-				var the_cal = val.substr(the_nextstart).search(the_search_regex);
-				if (the_cal === -1) {
-					$target_area.focus();
+				the_search_regex = new RegExp(the_val_search);
+				var cal = val.substr(the_nextstart).search(the_search_regex);
+				if (cal === -1) {
+					$target_area[0].focus();
 					return false;
 				}
-				the_cal += the_nextstart;
-				var the_slice = the_cal + the_val_search.length;
-				var the_front = val.slice(0, the_cal);
-				var the_rear = val.slice(the_slice);
+				cal += the_nextstart;
+				var slice_p = cal + the_val_search.length;
+				var front_v = val.slice(0, cal);
+				var rear_v = val.slice(slice_p);
 				// Replace Itself
-				$target_area[0].value = the_front + the_rear;
-				the_nextstart = the_cal;
-				$target_area[0].selectionStart = the_cal;
+				$target_area[0].value = front_v + rear_v;
+				the_nextstart = cal;
+				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
-				$target_area.focus();
+
+				// Needs to refocus to correct siting particular in post editor
+				$('#search-input1').focus();
+				$target_area[0].focus();
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
-			} else if (select_flag === 0) {
+
+				// Undo up to 5 times
+				if (the_past.length > 12) {
+					for (var i = 0; i < 3 ; i++) {
+						the_past.shift();
+					}
+				}
+				the_past.push(cal);
+				the_past.push(the_val_search);
+				the_past.push("");
+				the_bt3_backcol_hover = "#0ff";
+				$("#search-button3").css("color", "#000");
+			} else if (the_val_replace === "" && the_select_flag === 0) {
 			// Search
-				var the_search_regex = new RegExp(the_val_search);
-				var the_cal = val.substr(the_nextstart).search(the_search_regex);
-				if (the_cal === -1) {
-					$target_area.focus();
+				the_search_regex = new RegExp(the_val_search);
+				var cal = val.substr(the_nextstart).search(the_search_regex);
+				if (cal === -1) {
+					$target_area[0].focus();
 					return false;
 				}
-				the_cal += the_nextstart;
+				cal += the_nextstart;
 
-				the_nextstart = the_cal + the_val_search.length;
-				$target_area[0].selectionStart = the_cal;
+				the_nextstart = cal + the_val_search.length;
+				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
-				$target_area.focus();
+
+				// Needs to refocus to correct siting particular in post editor
+				$('#search-input1').focus();
+				$target_area[0].focus();
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
 			}
 
 			return false;
 		});
-	
-    		$('.search-input').bind('keydown.jimmy-editor_search', function(e) {
+
+		// Undo
+		$('#search-button3').bind('click.jimmy-editor_search_undo', function(e) {
+			var back_replace = the_past.pop();
+			var back_search = the_past.pop();
+			var cal = the_past.pop();
+
+			var val = $target_area[0].value;
+			var slice_p = cal + back_replace.length;
+			var front_v = val.slice(0, cal);
+			var rear_v = val.slice(slice_p);
+
+			$target_area[0].value = front_v + back_search + rear_v;
+			the_nextstart = cal + back_search.length;
+			$target_area[0].selectionStart = cal;
+			$target_area[0].selectionEnd = the_nextstart;
+
+			// Needs to refocus to correct siting particular in post editor
+			$('#search-input1').focus();
+			$target_area[0].focus();
+			$target_area.trigger('click.jimmy-editor_lines_showbox');
+
+			if (the_past.length === 0) {
+				the_bt3_backcol_hover = "#ff0";
+				$("#search-button3").css("color", "#888");
+			}
+
+			return false;
+		});
+
+		$('.search-input').bind('keydown.jimmy-editor_search', function(e) {
 			if ( e.keyCode == 13 ) { // enter key
 				e.preventDefault();
 				$('#search-button2').trigger('click.jimmy-editor_search');
@@ -717,7 +834,7 @@
 	
 		$('body').bind('mousemove.jimmy-editor_search', function(e) {
 	
-			if (sticker_flag === parseInt(order_num)) {
+			if (g_sticker_flag === parseInt(order_num)) {
 				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#search-box").css({
 						"left": e.clientX - 4 + "px",
@@ -781,8 +898,8 @@
 				}
 			)
 			.click( function() {
-					if (sticker_flag === parseInt(order_num)) {
-						sticker_flag = 0;
+					if (g_sticker_flag === parseInt(order_num)) {
+						g_sticker_flag = 0;
 						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
@@ -790,7 +907,7 @@
 								});
 						return false;
 					} else {
-						sticker_flag = parseInt(order_num);
+						g_sticker_flag = parseInt(order_num);
 						$(".the-stickers").css("background-color", "#f0f");
 						$(".the-pins").css({
 									"border-right": "1.0em solid transparent",
@@ -860,14 +977,14 @@
 				}
 			)
 			.click( function() {
-					sticker_flag = 0;
+					g_sticker_flag = 0;
 					$(".the-stickers").css("background-color", "#f0f");
 					$(".the-pins").css({
 							"border-right": "1.0em solid transparent",
 							"border-left": "1.0em solid transparent"
 							});
 					$("#style-box").css("visibility", "hidden");
-					$target_area.focus();
+					$target_area[0].focus();
 				}
 			)
 			.text("Font Color" + "\r\n" + "Size:Weight" + "\r\n" + "Back Color");
@@ -989,36 +1106,36 @@
 
 		$('#style-button1').bind('click.jimmy-editor_style', function(e) {
 			if ($('#style-input1').val() !== "" ) {
-				var the_font_color = $('#style-input1').val();
+				var font_color = $('#style-input1').val();
 			} else {
-				var the_font_color = $target_area.css("color");
+				var font_color = $target_area.css("color");
 			}
 
-			var the_parm = $('#style-input2').val();
-			the_parm = the_parm.split(":", 2);
-			if (the_parm[0] !== "" ) {
-				var the_font_size = the_parm[0];
+			var parm = $('#style-input2').val();
+			parm = parm.split(":", 2);
+			if (parm[0] !== "" ) {
+				var font_size = parm[0];
 			} else {
-				var the_font_size = $target_area.css("font-size");
+				var font_size = $target_area.css("font-size");
 			}
 
-			if (the_parm[1] !== "" ) {
-				var the_font_weight = the_parm[1];
+			if (parm[1] !== "" ) {
+				var font_weight = parm[1];
 			} else {
-				var the_font_weight = $target_area.css("font-weight");
+				var font_weight = $target_area.css("font-weight");
 			}
 
 			if ($('#style-input3').val() !== "" ) {
-				var the_back_color = $('#style-input3').val();
+				var back_color = $('#style-input3').val();
 			} else {
-				var the_back_color = $target_area.css("background-color");
+				var back_color = $target_area.css("background-color");
 			}
 
 			$target_area.css({
-					"color": the_font_color,
-					"font-size": the_font_size,
-					"font-weight": the_font_weight,
-					"background-color": the_back_color
+					"color": font_color,
+					"font-size": font_size,
+					"font-weight": font_weight,
+					"background-color": back_color
 					}
 				)
 
@@ -1039,7 +1156,7 @@
 	
 		$('body').bind('mousemove.jimmy-editor_style', function(e) {
 	
-			if (sticker_flag === parseInt(order_num)) {
+			if (g_sticker_flag === parseInt(order_num)) {
 				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#style-box").css({
 						"left": e.clientX - 4 + "px",
@@ -1050,7 +1167,7 @@
 		});
 	}
 
-	var sticker_flag = false;
+	var g_sticker_flag = false;
 	// variable $target_area should be global
 	// Post Editor
 	if ($("#content").length !== 0) {
