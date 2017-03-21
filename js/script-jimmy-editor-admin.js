@@ -41,7 +41,7 @@
 				"transition": "top 0.2s, left 0.2s"
 				}
 			);
-	
+
 		$("<div>").appendTo($("#lines-box"))
 			.attr({
 				"id": "lines-sticker",
@@ -119,9 +119,20 @@
 				"border-left": "1.0em solid transparent",
 				"transition": "border-right 0.5s, border-left 0.5s"
 				}
+			)
+			.click( function() {
+					g_sticker_flag = 0;
+					$(".the-stickers").css("background-color", "#f0f");
+					$(".the-pins").css({
+							"border-right": "1.0em solid transparent",
+							"border-left": "1.0em solid transparent"
+							});
+					$("#lines-box").css("visibility", "hidden");
+					$target_area[0].focus();
+					return false;
+				}
 			);
-		// End of Common
-	
+
 		$("<div>").appendTo($("#lines-box"))
 			.attr("id", "lines-text")
 			.css({
@@ -138,19 +149,32 @@
 				}
 			)
 			.click( function() {
-					g_sticker_flag = 0;
-					$(".the-stickers").css("background-color", "#f0f");
-					$(".the-pins").css({
-							"border-right": "1.0em solid transparent",
-							"border-left": "1.0em solid transparent"
-							});
-					$("#lines-box").css("visibility", "hidden");
-					$target_area[0].focus();
+					if(the_wrap === true) {
+						$("#lines-wrap").css("display", "none");
+						$target_area[0].focus();
+						the_wrap = false;
+					} else if(the_wrap === false) {
+						$("#lines-wrap").css("display", "inline-block");
+						the_wrap = true;
+					}
+					return false;
 				}
 			)
 			.text("");
-	
+
+		var the_wrap = false;
 		$("<div>").appendTo($("#lines-box"))
+			.attr("id", "lines-wrap")
+			.css({
+				"display": "none",
+				"vertical-align": "top",
+				"width": "6.0rem",
+				"height": "auto"
+				}
+			);
+		// End of Common
+
+		$("<div>").appendTo($("#lines-wrap"))
 			.attr("id", "lines-button1")
 			.css({
 				"display": "inline-block",
@@ -177,7 +201,7 @@
 						}
 			)
 			.text("Go");
-	
+
 		$("<input>").attr({
 					"id": "lines-input",
 					"type": "text",
@@ -201,9 +225,9 @@
 						$(this).val([]);
 					}
 				)
-				.appendTo($("#lines-box"));
+				.appendTo($("#lines-wrap"));
 
-		$("<div>").appendTo($("#lines-box"))
+		$("<div>").appendTo($("#lines-wrap"))
 			.attr("id", "lines-button2")
 			.css({
 				"display": "inline-block",
@@ -231,7 +255,7 @@
 			)
 			.text("Top");
 
-		$("<div>").appendTo($("#lines-box"))
+		$("<div>").appendTo($("#lines-wrap"))
 			.attr("id", "lines-button3")
 			.css({
 				"display": "inline-block",
@@ -258,7 +282,7 @@
 						}
 			)
 			.text("Last");
-	
+
 		$target_area.bind('click.jimmy-editor_lines_showbox', function(e) {
 	
 			var el = e.target;
@@ -275,7 +299,7 @@
 
 			return false;
 		});
-	
+
 		$('#lines-button1').bind('click.jimmy-editor_lines', function(e) {
 			var val_input = $('#lines-input').val();
 			if(val_input == parseInt(val_input)) {
@@ -290,7 +314,7 @@
 					var num_n = parseInt(val_input[1]);
 				}
 			}
-	
+
 			$('#lines-input').val("L:N?");
 			var val = $target_area[0].value;
 			var cal = val.substr(0).split("\n");
@@ -311,13 +335,27 @@
 			}
 
 			dest += num_n;
-			$target_area[0].selectionStart = dest;
-			$target_area[0].selectionEnd = dest;
 
 			// Needs to refocus to correct siting particular in post editor
+			$target_area[0].selectionStart = dest;
+			$target_area[0].selectionEnd = dest;
 			$('#lines-input').focus();
 			$target_area[0].focus();
-	
+
+			// For Correct Scroll with Caret
+			var front_v = val.slice(0, dest);
+			var rear_v = val.slice(dest);
+			$target_area[0].value = front_v + " " + rear_v;
+			$target_area[0].value = front_v + rear_v;
+
+			if(cal[lines_n].length === num_n) {
+				$target_area[0].selectionStart = dest;
+				$target_area[0].selectionEnd = dest;
+			} else {
+				$target_area[0].selectionStart = dest;
+				$target_area[0].selectionEnd = dest + 1;
+			}
+
 			lines_n++;
 	
 			$("#lines-text").text("L: " + lines_n + "\r\n" + "N: " + num_n);
@@ -352,7 +390,7 @@
 
 			return false;
 		});
-	
+
 		$('#lines-input').bind('keydown.jimmy-editor_lines', function(e) {
 			if ( e.keyCode == 13 ) { // enter key
 				e.preventDefault();
@@ -360,9 +398,9 @@
 				return false;
 			}
 		});
-	
+
 		$('body').bind('mousemove.jimmy-editor_lines', function(e) {
-	
+
 			if (g_sticker_flag === parseInt(order_num)) {
 				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#lines-box").css({
@@ -409,7 +447,7 @@
 				"transition": "top 0.2s, left 0.2s"
 				}
 			);
-	
+
 		$("<div>").appendTo($("#search-box"))
 			.attr({
 				"id": "search-sticker",
@@ -487,9 +525,20 @@
 				"border-left": "1.0em solid transparent",
 				"transition": "border-right 0.5s, border-left 0.5s"
 				}
+			)
+			.click( function() {
+					g_sticker_flag = 0;
+					$(".the-stickers").css("background-color", "#f0f");
+					$(".the-pins").css({
+							"border-right": "1.0em solid transparent",
+							"border-left": "1.0em solid transparent"
+							});
+					$("#search-box").css("visibility", "hidden");
+					$target_area[0].focus();
+					return false;
+				}
 			);
-		// End of Common
-	
+
 		$("<div>").appendTo($("#search-box"))
 			.attr("id", "search-text")
 			.css({
@@ -506,20 +555,33 @@
 				}
 			)
 			.click( function() {
-					g_sticker_flag = 0;
-					$(".the-stickers").css("background-color", "#f0f");
-					$(".the-pins").css({
-							"border-right": "1.0em solid transparent",
-							"border-left": "1.0em solid transparent"
-							});
-					$("#search-box").css("visibility", "hidden");
-					$target_area[0].focus();
+					if(the_wrap === true) {
+						$("#search-wrap").css("display", "none");
+						$target_area[0].focus();
+						the_wrap = false;
+					} else if(the_wrap === false) {
+						$("#search-wrap").css("display", "inline-block");
+						the_wrap = true;
+					}
+					return false;
 				}
 			)
 			.text("Search");
 
-		var the_select_flag = 0;
+		var the_wrap = false;
 		$("<div>").appendTo($("#search-box"))
+			.attr("id", "search-wrap")
+			.css({
+				"display": "none",
+				"vertical-align": "top",
+				"width": "6.0rem",
+				"height": "auto"
+				}
+			);
+		// End of Common
+
+		var the_select_flag = 0;
+		$("<div>").appendTo($("#search-wrap"))
 			.attr("id", "search-button1")
 			.css({
 				"display": "inline-block",
@@ -582,7 +644,7 @@
 						$(".search-input").val([]);
 					}
 				)
-				.appendTo($("#search-box"));
+				.appendTo($("#search-wrap"));
 
 		$("<input>").attr({
 					"id": "search-input2",
@@ -608,9 +670,9 @@
 						$("#search-input2").val([]);
 					}
 				)
-				.appendTo($("#search-box"));
-	
-		$("<div>").appendTo($("#search-box"))
+				.appendTo($("#search-wrap"));
+
+		$("<div>").appendTo($("#search-wrap"))
 			.attr("id", "search-button2")
 			.css({
 				"display": "inline-block",
@@ -639,7 +701,7 @@
 			.text("Go");
 
 		var the_bt3_backcol_hover = "#ff0";
-		$("<div>").appendTo($("#search-box"))
+		$("<div>").appendTo($("#search-wrap"))
 			.attr("id", "search-button3")
 			.css({
 				"display": "inline-block",
@@ -712,18 +774,23 @@
 					return false;
 				}
 				cal += the_nextstart;
+
+				// Needs to refocus to correct siting particular in post editor
+				$target_area[0].selectionStart = cal;
+				$target_area[0].selectionEnd = cal;
+				$('#search-input1').focus();
+				$target_area[0].focus();
+
 				var slice_p = cal + the_val_search.length;
 				var front_v = val.slice(0, cal);
 				var rear_v = val.slice(slice_p);
 				// Replace Itself
 				$target_area[0].value = front_v + the_val_replace + rear_v;
+
 				the_nextstart = cal + the_val_replace.length;
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
 
-				// Needs to refocus to correct siting particular in post editor
-				$('#search-input1').focus();
-				$target_area[0].focus();
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
 
 				// Undo up to 5 times
@@ -737,6 +804,8 @@
 				the_past.push(the_val_replace);
 				the_bt3_backcol_hover = "#0ff";
 				$("#search-button3").css("color", "#000");
+
+				return false;
 			} else if (the_val_replace === "" && the_select_flag === 2) {
 			// Delete
 				// If you want all delete, RegExp("the_val_search", "g")
@@ -747,18 +816,23 @@
 					return false;
 				}
 				cal += the_nextstart;
+
+				// Needs to refocus to correct siting particular in post editor
+				$target_area[0].selectionStart = cal;
+				$target_area[0].selectionEnd = cal;
+				$('#search-input1').focus();
+				$target_area[0].focus();
+
 				var slice_p = cal + the_val_search.length;
 				var front_v = val.slice(0, cal);
 				var rear_v = val.slice(slice_p);
 				// Replace Itself
 				$target_area[0].value = front_v + rear_v;
+
 				the_nextstart = cal;
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
 
-				// Needs to refocus to correct siting particular in post editor
-				$('#search-input1').focus();
-				$target_area[0].focus();
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
 
 				// Undo up to 5 times
@@ -772,6 +846,8 @@
 				the_past.push("");
 				the_bt3_backcol_hover = "#0ff";
 				$("#search-button3").css("color", "#000");
+
+				return false;
 			} else if (the_val_replace === "" && the_select_flag === 0) {
 			// Search
 				the_search_regex = new RegExp(the_val_search);
@@ -782,24 +858,48 @@
 				}
 				cal += the_nextstart;
 
+				// Needs to refocus to correct siting particular in post editor
+				$target_area[0].selectionStart = cal;
+				$target_area[0].selectionEnd = cal;
+				$('#search-input1').focus();
+				$target_area[0].focus();
+
+				// For Correct Scroll with Caret
+				var front_v = val.slice(0, cal);
+				var rear_v = val.slice(cal);
+				$target_area[0].value = front_v + " " + rear_v;
+				$target_area[0].value = front_v + rear_v;
+
 				the_nextstart = cal + the_val_search.length;
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
 
-				// Needs to refocus to correct siting particular in post editor
-				$('#search-input1').focus();
-				$target_area[0].focus();
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
+
+				return false;
 			}
 
+			$target_area[0].focus();
 			return false;
 		});
 
 		// Undo
 		$('#search-button3').bind('click.jimmy-editor_search_undo', function(e) {
+
+			if (the_past.length === 0) {
+				$target_area[0].focus();
+				return false;
+			}
+
 			var back_replace = the_past.pop();
 			var back_search = the_past.pop();
 			var cal = the_past.pop();
+
+			// Needs to refocus to correct siting particular in post editor
+			$target_area[0].selectionStart = cal;
+			$target_area[0].selectionEnd = cal;
+			$('#search-input1').focus();
+			$target_area[0].focus();
 
 			var val = $target_area[0].value;
 			var slice_p = cal + back_replace.length;
@@ -811,15 +911,12 @@
 			$target_area[0].selectionStart = cal;
 			$target_area[0].selectionEnd = the_nextstart;
 
-			// Needs to refocus to correct siting particular in post editor
-			$('#search-input1').focus();
-			$target_area[0].focus();
-			$target_area.trigger('click.jimmy-editor_lines_showbox');
-
 			if (the_past.length === 0) {
 				the_bt3_backcol_hover = "#ff0";
 				$("#search-button3").css("color", "#888");
 			}
+
+			$target_area.trigger('click.jimmy-editor_lines_showbox');
 
 			return false;
 		});
@@ -831,9 +928,9 @@
 				return false;
 			}
 		});
-	
+
 		$('body').bind('mousemove.jimmy-editor_search', function(e) {
-	
+
 			if (g_sticker_flag === parseInt(order_num)) {
 				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#search-box").css({
@@ -880,7 +977,7 @@
 				"transition": "top 0.2s, left 0.2s"
 				}
 			);
-	
+
 		$("<div>").appendTo($("#style-box"))
 			.attr({
 				"id": "style-sticker",
@@ -958,9 +1055,20 @@
 				"border-left": "1.0em solid transparent",
 				"transition": "border-right 0.5s, border-left 0.5s"
 				}
+			)
+			.click( function() {
+					g_sticker_flag = 0;
+					$(".the-stickers").css("background-color", "#f0f");
+					$(".the-pins").css({
+							"border-right": "1.0em solid transparent",
+							"border-left": "1.0em solid transparent"
+							});
+					$("#style-box").css("visibility", "hidden");
+					$target_area[0].focus();
+					return false;
+				}
 			);
-		// End of Common
-	
+
 		$("<div>").appendTo($("#style-box"))
 			.attr("id", "style-text")
 			.css({
@@ -977,18 +1085,31 @@
 				}
 			)
 			.click( function() {
-					g_sticker_flag = 0;
-					$(".the-stickers").css("background-color", "#f0f");
-					$(".the-pins").css({
-							"border-right": "1.0em solid transparent",
-							"border-left": "1.0em solid transparent"
-							});
-					$("#style-box").css("visibility", "hidden");
-					$target_area[0].focus();
+					if(the_wrap === true) {
+						$("#style-wrap").css("display", "none");
+						$target_area[0].focus();
+						the_wrap = false;
+					} else if(the_wrap === false) {
+						$("#style-wrap").css("display", "inline-block");
+						the_wrap = true;
+					}
+					return false;
 				}
 			)
 			.text("Font Color" + "\r\n" + "Size:Weight" + "\r\n" + "Back Color");
 		
+		var the_wrap = false;
+		$("<div>").appendTo($("#style-box"))
+			.attr("id", "style-wrap")
+			.css({
+				"display": "none",
+				"vertical-align": "top",
+				"width": "6.0rem",
+				"height": "auto"
+				}
+			);
+		// End of Common
+
 		var font_color = $target_area.css("color");
 		$("<input>").attr({
 					"id": "style-input1",
@@ -1014,7 +1135,7 @@
 						$("#style-input1").val([]);
 					}
 				)
-				.appendTo($("#style-box"));
+				.appendTo($("#style-wrap"));
 
 		var font_params = $target_area.css("font-size") + ":" + $target_area.css("font-weight");
 		$("<input>").attr({
@@ -1041,7 +1162,7 @@
 						$("#style-input2").val([]);
 					}
 				)
-				.appendTo($("#style-box"));
+				.appendTo($("#style-wrap"));
 
 		var back_color = $target_area.css("background-color");
 		$("<input>").attr({
@@ -1068,10 +1189,10 @@
 						$("#style-input3").val([]);
 					}
 				)
-				.appendTo($("#style-box"));
+				.appendTo($("#style-wrap"));
 
-	
-		$("<div>").appendTo($("#style-box"))
+
+		$("<div>").appendTo($("#style-wrap"))
 			.attr("id", "style-button1")
 			.css({
 				"display": "inline-block",
@@ -1143,6 +1264,8 @@
 			$('#style-input2').val($target_area.css("font-size") + ":" + $target_area.css("font-weight"));
 			$('#style-input3').val($target_area.css("background-color"));
 
+			$target_area[0].focus();
+
 			return false;
 		});
 
@@ -1153,9 +1276,9 @@
 				return false;
 			}
 		});
-	
+
 		$('body').bind('mousemove.jimmy-editor_style', function(e) {
-	
+
 			if (g_sticker_flag === parseInt(order_num)) {
 				// Slide the menu 4px minus of X and Y from the (mouse|touch) pointer
 				$("#style-box").css({

@@ -2,7 +2,7 @@
 Contributors: Kenta Ishii, Tokyo
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Version: 0.9.1 Beta
+Version: 0.9.2 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ Browser Base Application (Web Apps) has a good key to the future because its com
 
 1. General
 
-Touch or click Magenta Label on Sticker, then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Stick it where you want, by touching or clicking Magenta Label again. Light Cyan Label is its text, and if you touch or click it, Sticker will hidden from your display temporary. You can reshow Sticker by touch or click your editor area. White Label is a input area where you can write parameters to Function on Sticker. Yellow Label is a button to command Function.
+Touch or click Magenta Label on Sticker, then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Stick it where you want, by touching or clicking Magenta Label again. You can hide Sticker by touching or clicking Cyan Triangle. You can reshow Sticker by touch or click your editor area. Light Cyan Label is its text, and if you touch or click it, Sticker will show Function. White Label is a input area where you can write parameters to Function on Sticker. Yellow Label is a button to command Function.
 
 2. Line Box
 
@@ -49,6 +49,10 @@ On Middle: Type font size and font weight. Connect these by colon. e.g. "14px:bo
 
 Then touch or click "Change" or press Enter.
 
+== Compatibility ==
+
+Worked on So-called Modern Browsers. In Edge, word search has not worked. I mean, Modern Browsers' Common is to be open-sourced. Once, IE (now called as Edge) ware the giant of browsers on its proprietary style.
+
 == Installation ==
 
 Jimmy Editor is a plugin under the terms of the GNU GPL. Now on its Beta Version. I can't guarantee correct functions on this plugin. But if you have some curious to this plugin, you can download and test it.
@@ -70,9 +74,17 @@ GNU General Public License for more details.
 
 == Changelog ==
 
+= 0.9.2 Beta =
+* Trial on Browsers | Added Folding Function
+* On FireFox (Android), Chrome (Android), Opera (Android) Worked.
+* On Chrome (PC), Opera (PC) Worked.
+* On IE (V.11), on Post Editor, scrolling has not been synchronized with line search and word search.
+* On Edge, an odd of scrolling similar to FireFox (PC), plus word search has not worked. line search has worked. Even IE (V.11) worked word search!
+: March 21, 2017
+
 = 0.9.1 Beta =
 * Added Font | Background-color Style Changer
-* On FireFox (PC) Worked
+* On FireFox (PC V.52.0.1) Worked; but on Post Editor, scrolling has an odd when clicking "Top", not showing the top level of the textarea.
 : March 19, 2017
 
 = 0.9 Beta =
