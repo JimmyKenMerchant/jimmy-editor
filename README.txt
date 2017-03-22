@@ -27,7 +27,7 @@ Touch or click "Last" to take your caret to the bottom of your editor area.
 
 3. Search Box
 
-Change Command by touching or cliking "Select" which toggles "Search", "Replace", "Delete".
+Change Command by touching or clicking "Select" which toggles "Search", "Replace", "Delete".
 
 On "Search": Type your search word on the "Search?" White Label.
 
@@ -51,7 +51,7 @@ Then touch or click "Change" or press Enter.
 
 == Compatibility ==
 
-Worked on So-called Modern Browsers. In Edge, word search has not worked. I mean, Modern Browsers' Common is to be open-sourced. Once, IE (now called as Edge) ware the giant of browsers on its proprietary style.
+Worked on So-called Modern Browsers. In Edge, word search has not worked. I mean, Modern Browsers' Common is to be open-sourced. Once, IE (now called as Edge) was the giant of browsers on its proprietary style.
 
 == Installation ==
 
