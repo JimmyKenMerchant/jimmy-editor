@@ -2,7 +2,7 @@
 Contributors: Kenta Ishii, Tokyo
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Version: 0.9.2 Beta
+Version: 0.9.3 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 0.9.3 Beta =
+* Regular Expression Searching Modified
+: March 21, 2017
 
 = 0.9.2 Beta =
 * Trial on Browsers | Added Folding Function

@@ -766,8 +766,8 @@
 
 			if (the_val_replace !== "" && the_select_flag === 1) {
 			// Replace
-				// If you want all replace, RegExp("the_val_search", "g")
-				the_search_regex = new RegExp(the_val_search);
+				// If you want all match, RegExp("the_val_search", "gm")
+				the_search_regex = new RegExp(the_val_search, "m");
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
 					$target_area[0].focus();
@@ -775,13 +775,16 @@
 				}
 				cal += the_nextstart;
 
+				// Returns whole matched string on [0]
+				var mat = val.substr(the_nextstart).match(the_search_regex);
+
 				// Needs to refocus to correct siting particular in post editor
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = cal;
 				$('#search-input1').focus();
 				$target_area[0].focus();
 
-				var slice_p = cal + the_val_search.length;
+				var slice_p = cal + mat[0].length;
 				var front_v = val.slice(0, cal);
 				var rear_v = val.slice(slice_p);
 				// Replace Itself
@@ -800,7 +803,7 @@
 					}
 				}
 				the_past.push(cal);
-				the_past.push(the_val_search);
+				the_past.push(mat[0]);
 				the_past.push(the_val_replace);
 				the_bt3_backcol_hover = "#0ff";
 				$("#search-button3").css("color", "#000");
@@ -808,8 +811,7 @@
 				return false;
 			} else if (the_val_replace === "" && the_select_flag === 2) {
 			// Delete
-				// If you want all delete, RegExp("the_val_search", "g")
-				the_search_regex = new RegExp(the_val_search);
+				the_search_regex = new RegExp(the_val_search, "m");
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
 					$target_area[0].focus();
@@ -817,13 +819,16 @@
 				}
 				cal += the_nextstart;
 
+				// Returns whole matched string on [0]
+				var mat = val.substr(the_nextstart).match(the_search_regex);
+
 				// Needs to refocus to correct siting particular in post editor
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = cal;
 				$('#search-input1').focus();
 				$target_area[0].focus();
 
-				var slice_p = cal + the_val_search.length;
+				var slice_p = cal + mat[0].length;
 				var front_v = val.slice(0, cal);
 				var rear_v = val.slice(slice_p);
 				// Replace Itself
@@ -842,7 +847,7 @@
 					}
 				}
 				the_past.push(cal);
-				the_past.push(the_val_search);
+				the_past.push(mat[0]);
 				the_past.push("");
 				the_bt3_backcol_hover = "#0ff";
 				$("#search-button3").css("color", "#000");
@@ -850,13 +855,16 @@
 				return false;
 			} else if (the_val_replace === "" && the_select_flag === 0) {
 			// Search
-				the_search_regex = new RegExp(the_val_search);
+				the_search_regex = new RegExp(the_val_search, "m");
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
 					$target_area[0].focus();
 					return false;
 				}
 				cal += the_nextstart;
+
+				// Returns whole matched string on [0]
+				var mat = val.substr(the_nextstart).match(the_search_regex);
 
 				// Needs to refocus to correct siting particular in post editor
 				$target_area[0].selectionStart = cal;
@@ -870,7 +878,7 @@
 				$target_area[0].value = front_v + " " + rear_v;
 				$target_area[0].value = front_v + rear_v;
 
-				the_nextstart = cal + the_val_search.length;
+				the_nextstart = cal + mat[0].length;
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
 
