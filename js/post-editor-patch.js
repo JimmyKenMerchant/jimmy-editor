@@ -7,16 +7,21 @@
 	// tab in textareas
 
 	// Jimmy:Unlike theme or plugin's textarea (#newcontent), post-edit's textarea is (#content)
-	// Post Editor
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	var $target_area = {};
 	if ($("#content").length !== 0) {
-		var $target_area = $("#content");
-	// Theme or Plugin Editor
+	// Post Editor
+		$target_area = $("#content");
 	} else if ($("#newcontent").length !== 0) {
-		//var $target_area = $("#newcontent");
+	// Theme or Plugin Editor
+		//$target_area = $("#newcontent");
+		return true;
+	} else {
+	// Nothing of Both
 		return true;
 	}
 	$target_area.bind('keydown.wpevent_InsertTab', function(e) {
-	// Jimmy:
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 		var el = e.target, selStart, selEnd, val, scroll, sel;
 

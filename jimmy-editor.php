@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Jimmy Editor
-Plugin URI: http://jimmykenmerchant.com
-Description: Post Editor Patch
+Plugin URI: http://electronics.jimmykenmerchant.com/jimmy-editor
+Description: Post Editor Patch and More
 Author: Kenta Ishii
-Author URI: http://jimmykenmerchant.com
+Author URI: http://electronics.jimmykenmerchant.com
 Version: 0.9.4 Beta
 Text Domain: jimmy-editor
 Domain Path: /languages

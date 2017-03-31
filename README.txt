@@ -1,5 +1,5 @@
 === Jimmy Editor ===
-Contributors: Kenta Ishii, Tokyo
+Contributors: Kenta Ishii
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
 Version: 0.9.4 Beta

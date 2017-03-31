@@ -1351,12 +1351,16 @@
 
 	var g_sticker_flag = false;
 	// variable $target_area should be global
-	// Post Editor
+	var $target_area = {};
 	if ($("#content").length !== 0) {
-		var $target_area = $("#content");
-	// Theme or Plugin Editor
+	// Post Editor
+		$target_area = $("#content");
 	} else if ($("#newcontent").length !== 0) {
-		var $target_area = $("#newcontent");
+	// Theme or Plugin Editor
+		$target_area = $("#newcontent");
+	} else {
+	// Nothing of Both
+		return true;
 	}
 
 	// First and Second Arguments are X and Y coordinates
@@ -1364,5 +1368,7 @@
 	lines_box(400, 20, 1);
 	search_box(400, 45, 2);
 	style_box(400, 70, 3);
+
+	return true;
 
 })(jQuery);
