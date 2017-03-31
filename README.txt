@@ -2,7 +2,7 @@
 Contributors: Kenta Ishii, Tokyo
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Version: 0.9.3 Beta
+Version: 0.9.4 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,10 @@ On Middle: Type font size and font weight. Connect these by colon. e.g. "14px:bo
 
 Then touch or click "Change" or press Enter.
 
+5. Position and Style Saving
+
+Positions of Boxes and the style changed by Style Box will be saved. But these have limitation. If you close your browser or current window, saved positions will be erased.
+
 == Compatibility ==
 
 Worked on So-called Modern Browsers. In Edge, word search has not worked. I mean, Modern Browsers' Common is to be open-sourced. Once, IE (now called as Edge) was the giant of browsers on its proprietary style.
@@ -73,6 +77,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 0.9.4 Beta =
+* Added Position and Style Saving
+: March 21, 2017
 
 = 0.9.3 Beta =
 * Regular Expression Searching Modified

@@ -11,6 +11,13 @@
 	 * Line and Number Detection and Search
 	 */
 	function lines_box(x_pos, y_pos, order_num) {
+		// If moved already, retrieves its position
+		if (window.sessionStorage.getItem("x-" + order_num)) {
+			x_pos = window.sessionStorage.getItem("x-" + order_num);
+		}
+		if (window.sessionStorage.getItem("y-" + order_num)) {
+			y_pos = window.sessionStorage.getItem("y-" + order_num);
+		}
 		// Common
 		$target_area.attr({
 				"selectionStart": "0",
@@ -66,6 +73,10 @@
 									"border-right": "1.0em solid transparent",
 									"border-left": "1.0em solid transparent"
 								});
+						var xstore = parseInt($("#lines-box").css("left"));
+ 						window.sessionStorage.setItem("x-" + order_num, xstore);
+						var ystore = parseInt($("#lines-box").css("top"));
+ 						window.sessionStorage.setItem("y-" + order_num, ystore);
 						return false;
 					} else {
 						g_sticker_flag = parseInt(order_num);
@@ -417,6 +428,13 @@
 	 * Search, Replace or Delete Word
 	 */
 	function search_box(x_pos, y_pos, order_num) {
+		// If moved already, retrieves its position
+		if (window.sessionStorage.getItem("x-" + order_num)) {
+			x_pos = window.sessionStorage.getItem("x-" + order_num);
+		}
+		if (window.sessionStorage.getItem("y-" + order_num)) {
+			y_pos = window.sessionStorage.getItem("y-" + order_num);
+		}
 		// Common
 		$target_area.attr({
 				"selectionStart": "0",
@@ -472,6 +490,10 @@
 									"border-right": "1.0em solid transparent",
 									"border-left": "1.0em solid transparent"
 								});
+						var xstore = parseInt($("#search-box").css("left"));
+ 						window.sessionStorage.setItem("x-" + order_num, xstore);
+						var ystore = parseInt($("#search-box").css("top"));
+ 						window.sessionStorage.setItem("y-" + order_num, ystore);
 						return false;
 					} else {
 						g_sticker_flag = parseInt(order_num);
@@ -955,6 +977,26 @@
 	 * font color, font sytle and background color
 	 */
 	function style_box(x_pos, y_pos, order_num) {
+		// If moved already, retrieves its position
+		if (window.sessionStorage.getItem("x-" + order_num)) {
+			x_pos = window.sessionStorage.getItem("x-" + order_num);
+		}
+		if (window.sessionStorage.getItem("y-" + order_num)) {
+			y_pos = window.sessionStorage.getItem("y-" + order_num);
+		}
+		if (window.sessionStorage.getItem("col-" + order_num)) {
+			$target_area.css("color", window.sessionStorage.getItem("col-" + order_num));
+		}
+		if (window.sessionStorage.getItem("size-" + order_num)) {
+			$target_area.css("font-size", window.sessionStorage.getItem("size-" + order_num));
+		}
+		if (window.sessionStorage.getItem("weight-" + order_num)) {
+			$target_area.css("font-weight", window.sessionStorage.getItem("weight-" + order_num));
+		}
+		if (window.sessionStorage.getItem("backcol-" + order_num)) {
+			$target_area.css("background-color", window.sessionStorage.getItem("backcol-" + order_num));
+		}
+
 		// Common
 		$target_area.attr({
 				"selectionStart": "0",
@@ -1010,6 +1052,10 @@
 									"border-right": "1.0em solid transparent",
 									"border-left": "1.0em solid transparent"
 								});
+						var xstore = parseInt($("#style-box").css("left"));
+ 						window.sessionStorage.setItem("x-" + order_num, xstore);
+						var ystore = parseInt($("#style-box").css("top"));
+ 						window.sessionStorage.setItem("y-" + order_num, ystore);
 						return false;
 					} else {
 						g_sticker_flag = parseInt(order_num);
@@ -1267,6 +1313,11 @@
 					"background-color": back_color
 					}
 				)
+
+ 			window.sessionStorage.setItem("col-" + order_num, $target_area.css("color"));
+ 			window.sessionStorage.setItem("size-" + order_num, $target_area.css("font-size"));
+ 			window.sessionStorage.setItem("weight-" + order_num, $target_area.css("font-weight"));
+ 			window.sessionStorage.setItem("backcol-" + order_num, $target_area.css("background-color"));
 
 			$('#style-input1').val($target_area.css("color"));
 			$('#style-input2').val($target_area.css("font-size") + ":" + $target_area.css("font-weight"));
