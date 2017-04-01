@@ -568,7 +568,7 @@
 				"vertical-align": "top",
 				"width": "6.0rem",
 				"height": "auto",
-				"line-height": "1.5rem",
+				"line-height": "2.0rem",
 				"text-align": "center",
 				"font-size": "1.5rem",
 				"white-space": "pre",
@@ -610,7 +610,7 @@
 				"vertical-align": "top",
 				"width": "6.0rem",
 				"height": "auto",
-				"line-height": "1.5rem",
+				"line-height": "2.0rem",
 				"text-align": "center",
 				"font-size": "1.0rem",
 				"white-space": "pre",
@@ -694,6 +694,86 @@
 				)
 				.appendTo($("#search-wrap"));
 
+		var the_i_flag = false;
+		$("<div>").appendTo($("#search-wrap"))
+			.attr("id", "search-button4")
+			.css({
+				"display": "inline-block",
+				"vertical-align": "top",
+				"line-height": "1.8rem",
+				"text-align": "center",
+				"font-size": "1.0rem",
+				"font-weight": "bold",
+				"width": "3.0rem",
+				"height": "2.0rem",
+				"background-color": "#ff0",
+				"color": "#AAA",
+				"border-bottom": "1px solid #aaa",
+				"transition": "background-color 0.5s"
+				}
+			)
+			.click( function() {
+					if (the_i_flag === false) {
+						the_i_flag = true;
+						$(this).css("color", "#000");
+					} else if (the_i_flag === true) {
+						the_i_flag = false;
+						$(this).css("color", "#AAA");
+					}
+				}
+			)
+			.bind('mouseenter', function(e) {
+							$(this).css("background-color", "#0ff");
+							return false;
+						}
+			)
+			.bind('mouseleave', function(e) {
+							$(this).css("background-color", "#ff0");
+							return false;
+						}
+			)
+			.text("i");
+
+		var the_m_flag = false;
+		$("<div>").appendTo($("#search-wrap"))
+			.attr("id", "search-button5")
+			.css({
+				"display": "inline-block",
+				"vertical-align": "top",
+				"line-height": "1.8rem",
+				"text-align": "center",
+				"font-size": "1.0rem",
+				"font-weight": "bold",
+				"width": "3.0rem",
+				"height": "2.0rem",
+				"background-color": "#ff0",
+				"color": "#AAA",
+				"border-bottom": "1px solid #aaa",
+				"transition": "background-color 0.5s"
+				}
+			)
+			.click( function() {
+					if (the_m_flag === false) {
+						the_m_flag = true;
+						$(this).css("color", "#000");
+					} else if (the_m_flag === true) {
+						the_m_flag = false;
+						$(this).css("color", "#AAA");
+					}
+				}
+			)
+			.bind('mouseenter', function(e) {
+							$(this).css("background-color", "#0ff");
+							return false;
+						}
+			)
+			.bind('mouseleave', function(e) {
+							$(this).css("background-color", "#ff0");
+							return false;
+						}
+			)
+			.text("m");
+
 		$("<div>").appendTo($("#search-wrap"))
 			.attr("id", "search-button2")
 			.css({
@@ -735,7 +815,7 @@
 				"width": "3.0rem",
 				"height": "2.0rem",
 				"background-color": "#ff0",
-				"color": "#ff0",
+				"color": "#AAA",
 				"transition": "background-color 0.5s"
 				}
 			)
@@ -757,7 +837,7 @@
 			// Clear Existing Array for back
 			the_past.length = 0;
 			the_bt3_backcol_hover = "#ff0";
-			$("#search-button3").css("color", "#888");
+			$("#search-button3").css("color", "#AAA");
 			return false;	
 		});
 
@@ -784,12 +864,22 @@
 				the_nextstart = $target_area[0].selectionStart;
 			}
 
+			if (the_val_search === "") {
+				return false;
+			}		
+
 			var val = $target_area[0].value;
 
 			if (the_val_replace !== "" && the_select_flag === 1) {
 			// Replace
-				// If you want all match, RegExp("the_val_search", "gm")
-				the_search_regex = new RegExp(the_val_search, "m");
+				var modi = "";
+				if (the_m_flag === true) {
+					modi = modi + "m";
+				}
+				if (the_i_flag === true) {
+					modi = modi + "i";
+				}
+				the_search_regex = new RegExp(the_val_search, modi);
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
 					$target_area[0].focus();
@@ -818,8 +908,8 @@
 
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
 
-				// Undo up to 5 times
-				if (the_past.length > 12) {
+				// Undo up to 10 times
+				if (the_past.length > 27) {
 					for (var i = 0; i < 3 ; i++) {
 						the_past.shift();
 					}
@@ -833,7 +923,14 @@
 				return false;
 			} else if (the_val_replace === "" && the_select_flag === 2) {
 			// Delete
-				the_search_regex = new RegExp(the_val_search, "m");
+				var modi = "";
+				if (the_m_flag === true) {
+					modi = modi + "m";
+				}
+				if (the_i_flag === true) {
+					modi = modi + "i";
+				}
+				the_search_regex = new RegExp(the_val_search, modi);
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
 					$target_area[0].focus();
@@ -862,8 +959,8 @@
 
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
 
-				// Undo up to 5 times
-				if (the_past.length > 12) {
+				// Undo up to 10 times
+				if (the_past.length > 27) {
 					for (var i = 0; i < 3 ; i++) {
 						the_past.shift();
 					}
@@ -875,9 +972,16 @@
 				$("#search-button3").css("color", "#000");
 
 				return false;
-			} else if (the_val_replace === "" && the_select_flag === 0) {
+			} else if (the_select_flag === 0) {
 			// Search
-				the_search_regex = new RegExp(the_val_search, "m");
+				var modi = "";
+				if (the_m_flag === true) {
+					modi = modi + "m";
+				}
+				if (the_i_flag === true) {
+					modi = modi + "i";
+				}
+				the_search_regex = new RegExp(the_val_search, modi);
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
 					$target_area[0].focus();
@@ -943,7 +1047,7 @@
 
 			if (the_past.length === 0) {
 				the_bt3_backcol_hover = "#ff0";
-				$("#search-button3").css("color", "#888");
+				$("#search-button3").css("color", "#AAA");
 			}
 
 			$target_area.trigger('click.jimmy-editor_lines_showbox');
