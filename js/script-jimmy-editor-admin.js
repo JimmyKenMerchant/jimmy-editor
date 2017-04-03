@@ -872,6 +872,7 @@
 
 			if (the_val_replace !== "" && the_select_flag === 1) {
 			// Replace
+				// Make RegExp
 				var modi = "";
 				if (the_m_flag === true) {
 					modi = modi + "m";
@@ -880,12 +881,39 @@
 					modi = modi + "i";
 				}
 				the_search_regex = new RegExp(the_val_search, modi);
+
+				// Check current select is the target or not
+				// for replacing after searching
+				var pre_length = $target_area[0].selectionEnd - $target_area[0].selectionStart;
+				var pre_cal = val.substr($target_area[0].selectionStart, pre_length).search(the_search_regex);
+				if (pre_cal === 0) {
+					the_nextstart = $target_area[0].selectionStart;
+				}
+
+				// The main lines to replace
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
-					$target_area[0].focus();
-					return false;
+					//Back to Start
+					cal = val.substr(0).search(the_search_regex);
+					the_nextstart = 0;
+					if (cal === -1) {
+						$target_area[0].focus();
+						return false;
+					}
 				}
 				cal += the_nextstart;
+
+				// Make memory limit
+				if (the_past.length > 117) {
+					for (var i = 0; i < 3 ; i++) {
+						the_past.shift();
+					}
+				}
+				// Push previous select
+				the_past.push($target_area[0].selectionStart);
+				the_past.push($target_area[0].selectionEnd);
+				var temp_int = -1;
+				the_past.push(temp_int);
 
 				// Returns whole matched string on [0]
 				var mat = val.substr(the_nextstart).match(the_search_regex);
@@ -908,8 +936,8 @@
 
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
 
-				// Undo up to 10 times
-				if (the_past.length > 27) {
+				// Make memory limit
+				if (the_past.length > 117) {
 					for (var i = 0; i < 3 ; i++) {
 						the_past.shift();
 					}
@@ -923,6 +951,7 @@
 				return false;
 			} else if (the_val_replace === "" && the_select_flag === 2) {
 			// Delete
+				// Make RegExp
 				var modi = "";
 				if (the_m_flag === true) {
 					modi = modi + "m";
@@ -931,12 +960,39 @@
 					modi = modi + "i";
 				}
 				the_search_regex = new RegExp(the_val_search, modi);
+
+				// Check current select is the target or not
+				// for deleting after searching
+				var pre_length = $target_area[0].selectionEnd - $target_area[0].selectionStart;
+				var pre_cal = val.substr($target_area[0].selectionStart, pre_length).search(the_search_regex);
+				if (pre_cal === 0) {
+					the_nextstart = $target_area[0].selectionStart;
+				}
+
+				// The main lines to delete
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
-					$target_area[0].focus();
-					return false;
+					//Back to Start
+					cal = val.substr(0).search(the_search_regex);
+					the_nextstart = 0;
+					if (cal === -1) {
+						$target_area[0].focus();
+						return false;
+					}
 				}
 				cal += the_nextstart;
+
+				// Make memory limit
+				if (the_past.length > 117) {
+					for (var i = 0; i < 3 ; i++) {
+						the_past.shift();
+					}
+				}
+				// Push previous select
+				the_past.push($target_area[0].selectionStart);
+				the_past.push($target_area[0].selectionEnd);
+				var temp_int = -1;
+				the_past.push(temp_int);
 
 				// Returns whole matched string on [0]
 				var mat = val.substr(the_nextstart).match(the_search_regex);
@@ -959,8 +1015,8 @@
 
 				$target_area.trigger('click.jimmy-editor_lines_showbox');
 
-				// Undo up to 10 times
-				if (the_past.length > 27) {
+				// Make memory limit
+				if (the_past.length > 117) {
 					for (var i = 0; i < 3 ; i++) {
 						the_past.shift();
 					}
@@ -974,6 +1030,7 @@
 				return false;
 			} else if (the_select_flag === 0) {
 			// Search
+				// Make RegExp
 				var modi = "";
 				if (the_m_flag === true) {
 					modi = modi + "m";
@@ -982,12 +1039,33 @@
 					modi = modi + "i";
 				}
 				the_search_regex = new RegExp(the_val_search, modi);
+
+				// The main lines to search
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
-					$target_area[0].focus();
-					return false;
+					//Back to Start
+					cal = val.substr(0).search(the_search_regex);
+					the_nextstart = 0;
+					if (cal === -1) {
+						$target_area[0].focus();
+						return false;
+					}
 				}
 				cal += the_nextstart;
+
+				// Make memory limit
+				if (the_past.length > 117) {
+					for (var i = 0; i < 3 ; i++) {
+						the_past.shift();
+					}
+				}
+				// Push previous select
+				the_past.push($target_area[0].selectionStart);
+				the_past.push($target_area[0].selectionEnd);
+				var temp_int = -1;
+				the_past.push(temp_int);
+				the_bt3_backcol_hover = "#0ff";
+				$("#search-button3").css("color", "#000");
 
 				// Returns whole matched string on [0]
 				var mat = val.substr(the_nextstart).match(the_search_regex);
@@ -1035,15 +1113,22 @@
 			$('#search-input1').focus();
 			$target_area[0].focus();
 
-			var val = $target_area[0].value;
-			var slice_p = cal + back_replace.length;
-			var front_v = val.slice(0, cal);
-			var rear_v = val.slice(slice_p);
+			if ( back_replace === -1) {
+			// If it was search, or pre replace and delete
+				$target_area[0].selectionStart = cal;
+				$target_area[0].selectionEnd = back_search;
+			} else {
+			// If it was replace and delete
+				var val = $target_area[0].value;
+				var slice_p = cal + back_replace.length;
+				var front_v = val.slice(0, cal);
+				var rear_v = val.slice(slice_p);
 
-			$target_area[0].value = front_v + back_search + rear_v;
-			the_nextstart = cal + back_search.length;
-			$target_area[0].selectionStart = cal;
-			$target_area[0].selectionEnd = the_nextstart;
+				$target_area[0].value = front_v + back_search + rear_v;
+				the_nextstart = cal + back_search.length;
+				$target_area[0].selectionStart = cal;
+				$target_area[0].selectionEnd = the_nextstart;
+			}
 
 			if (the_past.length === 0) {
 				the_bt3_backcol_hover = "#ff0";

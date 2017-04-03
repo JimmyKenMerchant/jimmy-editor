@@ -2,7 +2,7 @@
 Contributors: Kenta Ishii
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Version: 0.9.5 Beta
+Version: 0.9.6 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,7 +37,7 @@ On "Delete": Type your target word on the "Search?" White Label, make sure to em
 
 Then touch or click "Go" or press Enter.
 
-If "Back" is active, you can undo these commands. "Back" is only 10 times because of saving memory loading. If you click or touch your editor area, "Back" is deactivated and cleaned past activities.
+If "Back" is active, you can undo these commands. "Back" is only up to 40 times because of saving memory loading. Replacing and Deleting reduce the limit of storing memory for "Back". If you click or touch your editor area, "Back" is deactivated and cleaned past activities.
 
 This Search Box is searching the word by JavaScript's Regular Expression. Type your search word by JavaScript's rule for Regular Expression without delimiters and select "m" (multi-lines modifier for use "^", "$" on each lines), and/or "i" (ignore cases). "g" is never be used because this modifier for all replacing words on one time [String.prototype.replace()], or get all matching words on one time [String.prototype.match()].
 
@@ -79,6 +79,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 0.9.6 Beta =
+* Added Functions (such as Back to Start) for Search Box
+: April 3, 2017
 
 = 0.9.5 Beta =
 * Added Modifier for Regular Expression in Search Box | Reviewed Text Domain
