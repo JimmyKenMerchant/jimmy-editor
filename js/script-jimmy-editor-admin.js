@@ -31,6 +31,7 @@
 				}
 			)
 			.css({
+				"cursor": "pointer",
 				"visibility": "hidden",
 				"display": "block",
 				"opacity": "0.8",
@@ -448,6 +449,7 @@
 				}
 			)
 			.css({
+				"cursor": "pointer",
 				"visibility": "hidden",
 				"display": "block",
 				"opacity": "0.8",
@@ -1199,6 +1201,7 @@
 				}
 			)
 			.css({
+				"cursor": "pointer",
 				"visibility": "hidden",
 				"display": "block",
 				"opacity": "0.8",

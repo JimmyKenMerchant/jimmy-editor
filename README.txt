@@ -2,44 +2,46 @@
 Contributors: Kenta Ishii
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Version: 0.9.6 Beta
+Version: 0.9.7 Beta
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Jimmy Editor is a plugin for patching default editors of WordPress. This Plugin's beginning was from my thought, how I can use the tab key to insert a indent on Post Editor (Text Mode). This is resolved by "post-editor-patch.js". Secondly, I tried to make some editorial functions; search, replace and delete. In addition, considered movable interfaces on Browsers. I named my challenge to "Sticker Box". It's not only like the window system on your PC, but able to work on your Tablet or Phone. I can say this challenge is making compatibility between mouse pointers and touching devices. Plus, I changed style of editors. Now It can be able to change background-color, color and font parameters. Multiple <textarea> tags with same name seems to make array on the name. It's just a hint to a multiple colored web editor.
-Browser Base Application (Web Apps) has a good key to the future because its compatibility has better than Computer Base Application. If You make one Web App, your Web App works on a browser in every platform. It's ideal — many developers are trying this, then finding some issues — and Browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in Computer. Besides, Computer has big memory and good speed these days. It's time to open the door to the future by Web Apps.
+Jimmy Editor is a plugin for patching default editors of WordPress. The beginning of this plugin was from my thought, "how can I use the tab key to insert a indent on Post Editor (Text Mode) as well as Plugin and Theme Editor?" This is resolved by "post-editor-patch.js", because this issue is derived from ID-naming for "text-area" tag. In addition, I tried to make some editorial functions: "Line number detection", "search, replace and delete of the word in the text" and "style changer for the text area" are considered. Plus, I also considered some movable interface for these functions on internet browsers. I named my movable interface to "Sticker Box". It's not only like the window system on your PC, but able to work on your tablet or phone. I can say that my movable interface is making compatibility between mouse pointers and touching devices, because my movable interface is using universal trigger, "mousemove" which used to occur on many touching panels on mobile devices, but not all, to make compatibility with traditional mouse system on PC.
+Browser Base Application (Web Apps) has a good key to the future because its compatibility has better than Computer Base Application. If You make one Web App, your Web App works on a browser in every platform. But it's ideal — many developers are trying this, then finding some issues — and browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in your computer. Because computers are having big memory and good speed these days, it's time to open the door to the future of Web Apps.
 
 == Tutorial ==
 
 1. General
 
-Touch or click Magenta Label on Sticker, then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Stick it where you want, by touching or clicking Magenta Label again. You can hide Sticker by touching or clicking Cyan Triangle. You can reshow Sticker by touch or click your editor area. Light Cyan Label is its text, and if you touch or click it, Sticker will show Function. White Label is a input area where you can write parameters to Function on Sticker. Yellow Label is a button to command Function.
+Touch or click Magenta Label on "Sticker Box", then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Stick it where you want, by touching or clicking Magenta Label again. You can hide "Sticker Box" by touching or clicking Cyan Triangle. You can reshow "Sticker Box" by touch or click your text area. Light Cyan Label is its text, and if you touch or click it, "Sticker Box" will show Function. White Label is a input area where you can write parameters of functions on "Sticker Box". Yellow Label is a button to command Function.
 
 2. Line Box
 
-Touch or click your editor area, then you can know how many lines and/or numbers the caret in your editor is placed on. Type lines and/or numbers on White Label and touch or click "Go" or press Enter so that your caret moves where you want. e.g. typing "20:6" means your caret moves to the 20th line and the 6th word. Typing "3" means your caret moves to the 3rd line and its beginning.
+Touch or click your text area, then you can know how many lines and numbers the caret in your text is placed on. Type lines and/or numbers on White Label and touch or click "Go" or press Enter so that your caret moves where you want, e.g., typing "20:6" means your caret moves to the 20th line and the 6th word. Typing "3" means your caret moves to the 3rd line and its beginning.
 
-Touch or click "Top" to take your caret to the top of your editor area.
+Touch or click "Top" to take your caret to the top of your text area.
 
-Touch or click "Last" to take your caret to the bottom of your editor area.
+Touch or click "Last" to take your caret to the bottom of your text area.
 
 3. Search Box
 
 Change Command by touching or clicking "Select" which toggles "Search", "Replace", "Delete".
 
-On "Search": Type your search word on the "Search?" White Label.
+On "Search": Type your target word on the "Search?" White Label.
 
 On "Replace": Type your target word on the "Search?" White Label, your demand word on the "Replace?".
 
 On "Delete": Type your target word on the "Search?" White Label, make sure to empty on the "Replace?".
 
+Because your target word is based on Regular Expression, in several cases, you need to write the word with the rule of Regular Expression, e.g., if you want search "*", write it with escape character such as "\*", and if you want search two spaces, write "\s\s". Also see below described for Regular Expression.
+
 Then touch or click "Go" or press Enter.
 
-If "Back" is active, you can undo these commands. "Back" is only up to 40 times because of saving memory loading. Replacing and Deleting reduce the limit of storing memory for "Back". If you click or touch your editor area, "Back" is deactivated and cleaned past activities.
+If "Back" is active, you can undo these commands. "Back" is only up to 40 times because of saving memory loading. Replacing and Deleting reduce the limit of storing memory for "Back". If you click or touch your text area, "Back" is deactivated and cleaned past activities.
 
-This Search Box is searching the word by JavaScript's Regular Expression. Type your search word by JavaScript's rule for Regular Expression without delimiters and select "m" (multi-lines modifier for use "^", "$" on each lines), and/or "i" (ignore cases). "g" is never be used because this modifier for all replacing words on one time [String.prototype.replace()], or get all matching words on one time [String.prototype.match()].
+This Search Box is searching the word by JavaScript's Regular Expression. Type your search word by the rule of Regular Expression without delimiters, and select "m" (multi-lines modifier for use "^", "$" on each lines), and/or "i" (ignore cases). "g" is never be used because this modifier for all replacing words on one time [String.prototype.replace()], or get all matching words on one time [String.prototype.match()].
 
 4. Style Box
 
@@ -47,7 +49,7 @@ Each current status is indicated on White Label. The top is font color, the midd
 
 On Top and Bottom: Type color code by Hexadecimal style (e.g. "#89abcd") or just as displayed (e.g. "rgb(123,213,132)") to change font and background color.
 
-On Middle: Type font size and font weight. Connect these by colon. e.g. "14px:bold" means font size will be 14px and font weight will be bold. Typing "14px" means font size will be 14px and font weight will not be changed. Typing ":400" means font size will not be changed and font weight will be 400.
+On Middle: Type font size and font weight. Connect these by one colon, e.g, "14px:bold" means font size will be 14px and font weight will be bold (typically shows "700" numerically as a result). Typing "14px" means font size will be 14px and font weight will not be changed. Typing ":400" means font size will not be changed and font weight will be 400.
 
 Then touch or click "Change" or press Enter.
 
@@ -57,11 +59,15 @@ Positions of Boxes and the style changed by Style Box will be saved. But these h
 
 == Compatibility ==
 
-Worked on So-called Modern Browsers. In Edge, word search has not worked. I mean, Modern Browsers' Common is to be open-sourced. Once, IE (now called as Edge) was the giant of browsers on its proprietary style.
+1. Browsers
+Worked on So-called "Modern Browsers". In Edge, word search has not worked. I mean, Modern Browsers' Common is to be open-sourced. Once, IE (now called as Edge) was the giant of browsers on its proprietary style.
+
+2. OS and Devices
+I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Devices. In these, this plugin works. But the "mousemove" event for moving "Sticker Box" may not be embedded in any devices. You may meet an issue of moving "Sticker Box".
 
 == Installation ==
 
-Jimmy Editor is a plugin under the terms of the GNU GPL. Now on its Beta Version. I can't guarantee correct functions on this plugin. But if you have some curious to this plugin, you can download and test it.
+Jimmy Editor is a plugin under the terms of the GNU GPL. If you have some curious to this plugin, you can download and test it from GitHub public repository. https://github.com/JimmyKenMerchant/jimmy-editor
 
 == Copyright ==
 
@@ -79,6 +85,10 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 == Changelog ==
+
+= 0.9.7 Beta =
+* Changed the type of the pointing cursor for each Box | Modified README.txt
+: April 4, 2017
 
 = 0.9.6 Beta =
 * Added Functions (such as Back to Start) for Search Box
