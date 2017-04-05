@@ -6,18 +6,31 @@
  */
 (function($) {
 
+
 	/*
 	 * lines Box Construction
 	 * Line and Number Detection and Search
 	 */
-	function lines_box(x_pos, y_pos, order_num) {
+	function linesBox(x_pos, y_pos, order_num) {
 		// If moved already, retrieves its position
 		if (window.sessionStorage.getItem("x-" + order_num)) {
 			x_pos = window.sessionStorage.getItem("x-" + order_num);
+		} else {
+			// Convert the percentage of X positions to the pixel coordinate.
+			var win_width = $(window).width();
+			var x_pcent = parseInt(x_pos) / 100;
+			x_pos = parseInt(win_width * x_pcent);
 		}
+
 		if (window.sessionStorage.getItem("y-" + order_num)) {
 			y_pos = window.sessionStorage.getItem("y-" + order_num);
+		} else {
+			// Convert the percentage of Y positions to the pixel coordinate.
+			var win_height = $(window).height();
+			var y_pcent = parseInt(y_pos) / 100;
+			y_pos = parseInt(win_height * y_pcent);
 		}
+
 		// Common
 		$target_area.attr({
 				"selectionStart": "0",
@@ -351,6 +364,7 @@
 			// Needs to refocus to correct siting particular in post editor
 			$target_area[0].selectionStart = dest;
 			$target_area[0].selectionEnd = dest;
+			$(window).scrollTop(0);
 			$('#lines-input').focus();
 			$target_area[0].focus();
 
@@ -380,6 +394,7 @@
 			$target_area[0].selectionEnd = 0;
 
 			// Needs to refocus to correct siting particular in post editor
+			$(window).scrollTop(0);
 			$('#lines-input').focus();
 			$target_area[0].focus();
 
@@ -394,6 +409,7 @@
 			$target_area[0].selectionEnd = val.length;
 
 			// Needs to refocus to correct siting particular in post editor
+			$(window).scrollTop(0);
 			$('#lines-input').focus();
 			$target_area[0].focus();
 
@@ -419,23 +435,37 @@
 						"left": e.clientX - 4 + "px",
 						"top": e.clientY - 4 + "px"
 						});
+
 				return false;
 			}
 		});
 	}
 
+
 	/*
 	 * Search Box Construction
 	 * Search, Replace or Delete Word
 	 */
-	function search_box(x_pos, y_pos, order_num) {
+	function searchBox(x_pos, y_pos, order_num) {
 		// If moved already, retrieves its position
 		if (window.sessionStorage.getItem("x-" + order_num)) {
 			x_pos = window.sessionStorage.getItem("x-" + order_num);
+		} else {
+			// Convert the percentage of X positions to the pixel coordinate.
+			var win_width = $(window).width();
+			var x_pcent = parseInt(x_pos) / 100;
+			x_pos = parseInt(win_width * x_pcent);
 		}
+
 		if (window.sessionStorage.getItem("y-" + order_num)) {
 			y_pos = window.sessionStorage.getItem("y-" + order_num);
+		} else {
+			// Convert the percentage of Y positions to the pixel coordinate.
+			var win_height = $(window).height();
+			var y_pcent = parseInt(y_pos) / 100;
+			y_pos = parseInt(win_height * y_pcent);
 		}
+
 		// Common
 		$target_area.attr({
 				"selectionStart": "0",
@@ -923,6 +953,7 @@
 				// Needs to refocus to correct siting particular in post editor
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = cal;
+				$(window).scrollTop(0);
 				$('#search-input1').focus();
 				$target_area[0].focus();
 
@@ -1002,6 +1033,7 @@
 				// Needs to refocus to correct siting particular in post editor
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = cal;
+				$(window).scrollTop(0);
 				$('#search-input1').focus();
 				$target_area[0].focus();
 
@@ -1075,6 +1107,7 @@
 				// Needs to refocus to correct siting particular in post editor
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = cal;
+				$(window).scrollTop(0);
 				$('#search-input1').focus();
 				$target_area[0].focus();
 
@@ -1112,6 +1145,7 @@
 			// Needs to refocus to correct siting particular in post editor
 			$target_area[0].selectionStart = cal;
 			$target_area[0].selectionEnd = cal;
+			$(window).scrollTop(0);
 			$('#search-input1').focus();
 			$target_area[0].focus();
 
@@ -1158,23 +1192,38 @@
 						"left": e.clientX - 4 + "px",
 						"top": e.clientY - 4 + "px"
 						});
+
 				return false;
 			}
 		});
 	}
 
+
 	/*
 	 * Style Box Construction
 	 * font color, font sytle and background color
 	 */
-	function style_box(x_pos, y_pos, order_num) {
+	function styleBox(x_pos, y_pos, order_num) {
 		// If moved already, retrieves its position
 		if (window.sessionStorage.getItem("x-" + order_num)) {
 			x_pos = window.sessionStorage.getItem("x-" + order_num);
+		} else {
+			// Convert the percentage of X positions to the pixel coordinate.
+			var win_width = $(window).width();
+			var x_pcent = parseInt(x_pos) / 100;
+			x_pos = parseInt(win_width * x_pcent);
 		}
+
 		if (window.sessionStorage.getItem("y-" + order_num)) {
 			y_pos = window.sessionStorage.getItem("y-" + order_num);
+		} else {
+			// Convert the percentage of Y positions to the pixel coordinate.
+			var win_height = $(window).height();
+			var y_pcent = parseInt(y_pos) / 100;
+			y_pos = parseInt(win_height * y_pcent);
 		}
+
+		// Style retrieve
 		if (window.sessionStorage.getItem("col-" + order_num)) {
 			$target_area.css("color", window.sessionStorage.getItem("col-" + order_num));
 		}
@@ -1536,12 +1585,45 @@
 						"left": e.clientX - 4 + "px",
 						"top": e.clientY - 4 + "px"
 						});
+
 				return false;
 			}
 		});
 	}
 
-	var g_sticker_flag = false;
+
+	/*
+	 * Stop Click Event when "Sticker Box" moving is on active
+	 */
+	function stopClickEvent() {
+		$('*').bind('click.jimmy-editor_stopclick', function(e) {
+			if (g_sticker_flag === 0) {
+				return true;
+			}
+			// return false means stopPropagation() and preventDefault()
+			e.preventDefault();
+		});
+
+		// Stop "click" is not perfect. Add "mousedown" and "mouseup"
+		$('*').bind('mousedown.jimmy-editor_stopclick', function(e) {
+			if (g_sticker_flag === 0) {
+				return true;
+			}
+
+			e.preventDefault();
+		});
+
+		$('*').bind('mouseup.jimmy-editor_stopclick', function(e) {
+			if (g_sticker_flag === 0) {
+				return true;
+			}
+
+			e.preventDefault();
+		});
+	}
+
+
+	var g_sticker_flag = 0;
 	// variable $target_area should be global
 	var $target_area = {};
 	if ($("#content").length !== 0) {
@@ -1555,11 +1637,13 @@
 		return true;
 	}
 
-	// First and Second Arguments are X and Y coordinates
+	// First and Second Arguments are X and Y percentages to Window of your Browser
 	// Last Argument needs unique number except 0
-	lines_box(400, 20, 1);
-	search_box(400, 45, 2);
-	style_box(400, 70, 3);
+	stopClickEvent();
+	styleBox("40%", "40%", 1);
+	searchBox("45%", "45%", 2);
+	linesBox("50%", "50%", 3);
+
 
 	return true;
 

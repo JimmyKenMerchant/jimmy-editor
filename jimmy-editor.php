@@ -5,11 +5,13 @@ Plugin URI: http://electronics.jimmykenmerchant.com/jimmy-editor/
 Description: Post Editor Patch and More
 Author: Kenta Ishii
 Author URI: http://electronics.jimmykenmerchant.com
-Version: 0.9.7 Beta
+Version: 0.9.8 Beta
 Text Domain: jimmy-editor
 Domain Path: /languages
 License: GPL2 or Later
 */
+
+//error_log("Debug for jimmy-editor", 0);
 
 /*
  * post-editor patch in admin pages
