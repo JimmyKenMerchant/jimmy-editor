@@ -6,6 +6,27 @@
  */
 (function($) {
 
+	var g_sticker_flag = 0;
+	// variable $target_area should be global
+	var $target_area = {};
+	if ($("#content").length !== 0) {
+	// Post Editor
+		$target_area = $("#content");
+	} else if ($("#newcontent").length !== 0) {
+	// Theme or Plugin Editor
+		$target_area = $("#newcontent");
+	} else {
+	// Nothing of Both
+		return true;
+	}
+
+	// First and Second Arguments are X and Y percentages to Window of your Browser
+	// Last Argument needs unique number except 0
+	stopClickEvent();
+	styleBox("40%", "40%", 1);
+	searchBox("45%", "45%", 2);
+	linesBox("50%", "50%", 3);
+
 
 	/*
 	 * lines Box Construction
@@ -1621,29 +1642,6 @@
 			e.preventDefault();
 		});
 	}
-
-
-	var g_sticker_flag = 0;
-	// variable $target_area should be global
-	var $target_area = {};
-	if ($("#content").length !== 0) {
-	// Post Editor
-		$target_area = $("#content");
-	} else if ($("#newcontent").length !== 0) {
-	// Theme or Plugin Editor
-		$target_area = $("#newcontent");
-	} else {
-	// Nothing of Both
-		return true;
-	}
-
-	// First and Second Arguments are X and Y percentages to Window of your Browser
-	// Last Argument needs unique number except 0
-	stopClickEvent();
-	styleBox("40%", "40%", 1);
-	searchBox("45%", "45%", 2);
-	linesBox("50%", "50%", 3);
-
 
 	return true;
 
