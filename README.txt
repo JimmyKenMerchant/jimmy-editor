@@ -1,14 +1,24 @@
 === Jimmy Editor ===
-Contributors: Kenta Ishii
+Contributors: jimmyken
+Plugin Name: Jimmy Editor
+Plugin URI: http://electronics.jimmykenmerchant.com/jimmy-editor/
+Tags: admin, admin-menu, administrator, administrator-menu, menu, editor, post-editor, posts-editor, theme-editor, themes-editor, plugin-editor, plugins-editor
+Author: Kenta Ishii
+Author URI: http://electronics.jimmykenmerchant.com
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Version: 0.9.8 Beta
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+== Summary ==
+
+Jimmy Editor, a WordPress plugin, is a suggestion that you have freedom of making Browser Base Application (WebApps). Movable Graphical Interfaces in Internet Browsers, I called it as "Sticker Box", makes your plot for WebApps to be layout free and improve its usability. In this plugin, "Sticker Box" is used as a bunch of editor tools, "Lines Box", "Search Box" and "Style Box". This tools gives you how well "Sticker Box" works in Internet Browsers.
 
 == Description ==
 
 Jimmy Editor is a plugin for patching default editors of WordPress. The beginning of this plugin was from my thought, "how can I use the tab key to insert a indent on Post Editor (Text Mode) as well as Plugin and Theme Editor?" This is resolved by "post-editor-patch.js", because this issue is derived from ID-naming for "textarea" tag. In addition, I tried to make some editorial functions: "Line number detection", "search, replace and delete of the word in the text" and "style changer for the text area" are considered. Plus, I also considered some movable interface for these functions on internet browsers. I named my movable interface to "Sticker Box". It's not only like the window system on your PC, but able to work on your tablet or phone. I can say that my movable interface is making compatibility between mouse pointers and touching devices, because my movable interface is using universal trigger, "mousemove" which used to occur on many touching panels on mobile devices, but not all, to make compatibility with traditional mouse system on PC.
+
 Browser Base Application (Web Apps) has a good key to the future because its compatibility has better than Computer Base Application. If You make one Web App, your Web App works on a browser in every platform. But it's ideal — many developers are trying this, then finding some issues — and browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in your computer. Because computers are having big memory and good speed these days, it's time to open the door to the future of Web Apps.
 
 == Tutorial ==
@@ -71,7 +81,7 @@ I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Devices. In 
 
 == Installation ==
 
-Jimmy Editor is a plugin under the terms of the GNU GPL. If you have some curious to this plugin, you can download and test it from GitHub public repository. https://github.com/JimmyKenMerchant/jimmy-editor
+Jimmy Editor is a plugin under the terms of the GNU GPL. If you have some curious to this plugin, you can download and test it from GitHub public repository. https://github.com/JimmyKenMerchant/jimmy-editor/
 
 == Copyright ==
 
@@ -93,8 +103,8 @@ GNU General Public License for more details.
 = 0.9.8 Beta =
 * Improved initial X Y positions of each Box | Modified Usability on Touching Device
 * Last Trial for Release in WordPress.org
-* (* Already Resolved by adding to reset window Y scroll in this version *) FireFox, IE and Edge's issue to hide top level of textarea when "Top" in Lines Box seems to scroll to the top of the textarea, not the top of "form" tag (Parent of textarea) in default, unlike Chrome and Opera. If wanting to fix this problem, make the function to jump to the top of "form" tag manually when "Top" and "Go" to low numbered lines.
-* Edge(38.14393.0.0)'s issue to stop searching and not to be able to search the next word in Search Box randomly seems tricky because in IE(V.11), searching is well done. Edge is a de facto later version of IE(V.11). Plus, if you double click "Go" button, searching go ahead to the next word. The reason of this issue seems a pointing problem, reseting cursor positions and pointing the end of the text area, after focusing other elements (e.g. put cursor on any point in the text area then start search, it starts from the end of the text area). IE(V.11) clears this problem. To avoid this issue, it is needed to make function to save previous cursor positions manually before focusing other elements. But I decided to stay this issues because of correctness in IE(V.11), a de facto earlier version of Edge.
+* (*Already Resolved by adding to reset window Y scroll in this version*) FireFox, IE and Edge's issue to hide top level of textarea when "Top" in Lines Box seems to scroll to the top of the textarea, not the top of "form" tag (Parent of textarea) in default, unlike Chrome and Opera. If wanting to fix this problem, make the function to jump to the top of "form" tag manually when "Top" and "Go" to low numbered lines.
+* Edge (38.14393.0.0)'s issue to stop searching and not to be able to search the next word in Search Box randomly seems tricky because in IE (11), searching is well done except scrolling. Edge is a de facto later version of IE. Plus, if you double click "Go" button, searching go ahead to the next word. The reason of this issue seems a pointing problem, reseting cursor positions and pointing the end of the text area, after focusing other elements (e.g. put cursor on any point in the text area then start search, it starts from the end of the text area). IE clears this problem. To avoid this issue, it is needed to make function to save previous cursor positions manually before focusing other elements. But I decided to stay this issues because of correctness in IE, a de facto earlier version of Edge.
 : April 5, 2017
 
 = 0.9.7 Beta =
@@ -119,15 +129,15 @@ GNU General Public License for more details.
 
 = 0.9.2 Beta =
 * Trial on Browsers | Added Folding Function
-* On FireFox (Android), Chrome (Android), Opera (Android) Worked.
-* On Chrome (PC), Opera (PC) Worked.
-* On IE (V.11), on Post Editor, scrolling has not been synchronized with line search and word search.
-* On Edge, an odd of scrolling similar to FireFox (PC), plus word search has not worked. line search has worked. Even IE (V.11) worked word search!
+* On FireFox (Android) Worked.
+* On Chrome (PC), Opera (PC), Chrome (Android), Opera (Android) Worked by adding refocusing the text area.
+* On IE (11), on Post Editor, scrolling has not been synchronized with Lines Box and Search Box.
+* On Edge (38.14393.0.0), an odd of scrolling similar to FireFox (PC), plus Search Box has not been worked, even though IE worked it. Lines Box and Style Box have been worked on Edge.
 : March 21, 2017
 
 = 0.9.1 Beta =
 * Added Font | Background-color Style Changer
-* On FireFox (PC V.52.0.1) Worked; but on Post Editor, scrolling has an odd when clicking "Top", not showing the top level of the textarea.
+* On FireFox (PC V.52.0.1) Worked; but on Post Editor, scrolling has an odd, e.g., when clicking "Top", not showing the top level of the text area.
 : March 19, 2017
 
 = 0.9 Beta =

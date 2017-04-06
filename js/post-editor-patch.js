@@ -23,7 +23,7 @@
 		return true;
 	}
 	$target_area.bind('keydown.wpevent_InsertTab', function(e) {
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Jimmy
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> jimmyken
 		var el = e.target, selStart, selEnd, val, scroll, sel;
 
 		if ( e.keyCode == 27 ) { // escape key
