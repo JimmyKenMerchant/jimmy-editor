@@ -13,13 +13,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Summary ==
 
-Jimmy Editor, a WordPress plugin, is a suggestion that you have freedom of making Browser Base Application (WebApps). Movable Graphical Interfaces in Internet Browsers, I called it as "Sticker Box", makes your plot for WebApps to be layout free and improve its usability. In this plugin, "Sticker Box" is used as a bunch of editor tools, "Lines Box", "Search Box" and "Style Box". This tools gives you how well "Sticker Box" works in Internet Browsers.
+Jimmy Editor, a WordPress plugin, is a suggestion that you have freedom of making Web Browser Based Applications (Web Apps). Movable Graphical Interfaces in Web browsers, I called it as "Sticker Box", makes your plot for Web Apps to be layout free and improve its usability. In this plugin, "Sticker Box" is used as a bunch of editor tools, "Lines Box", "Search Box" and "Style Box". This tools gives you how well "Sticker Box" works in Web browsers.
 
 == Description ==
 
-Jimmy Editor is a plugin for patching default editors of WordPress. The beginning of this plugin was from my thought, "how can I use the tab key to insert a indent on Post Editor (Text Mode) as well as Plugin and Theme Editor?" This is resolved by "post-editor-patch.js", because this issue is derived from ID-naming for "textarea" tag. In addition, I tried to make some editorial functions: "Line number detection", "search, replace and delete of the word in the text" and "style changer for the text area" are considered. Plus, I also considered some movable interface for these functions on internet browsers. I named my movable interface to "Sticker Box". It's not only like the window system on your PC, but able to work on your tablet or phone. I can say that my movable interface is making compatibility between mouse pointers and touching devices, because my movable interface is using universal trigger, "mousemove" which used to occur on many touching panels on mobile devices, but not all, to make compatibility with traditional mouse system on PC.
+Jimmy Editor is a plugin for patching default editors of WordPress. The beginning of this plugin was from my thought, "how can I use the tab key to insert a indent on Post Editor (Text Mode) as well as Plugin and Theme Editor?" This is resolved by "post-editor-patch.js", because this issue is derived from ID naming for "textarea" tag. In addition, I tried to make some editorial functions: "Line number detection", "search, replace and delete of the word in the text" and "style changer for the text area" are considered. Plus, I also considered some movable interface for these functions on Web browsers. I named my movable interface to "Sticker Box". It's not only like the window system on your PC, but able to work on your tablet or phone. I can say that my movable interface is making compatibility between mouse pointers and touching devices, because my movable interface is using universal trigger, "mousemove" which used to occur on many touching panels on mobile devices, but not all, to make compatibility with traditional mouse system on PC.
 
-Browser Base Application (Web Apps) has a good key to the future because its compatibility has better than Computer Base Application. If You make one Web App, your Web App works on a browser in every platform. But it's ideal — many developers are trying this, then finding some issues — and browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in your computer. Because computers are having big memory and good speed these days, it's time to open the door to the future of Web Apps.
+Web Browser Based Applications (Web Apps) has a good key to the future because its compatibility has better than Computer Based Applications (Native Apps). If You make one Web App, your Web App works on every browser in every platform. But it's ideal — many developers are trying this, then finding some issues — and browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in your computer. Because computers are having big memory and good speed these days, it's time to open the door to the future of Web Apps. I'm now trying to make ideal Web App
 
 == Tutorial ==
 
@@ -73,8 +73,8 @@ When any Box has been moving by clicking Magenta Label, and Cyan Triangle has be
 
 == Compatibility ==
 
-1. Browsers
-Worked on So-called "Modern Browsers". In Edge, word search has not worked. I mean, Modern Browsers' Common is to be open-sourced. Once, IE (now called as Edge) was the giant of browsers on its proprietary style.
+1. Web Browsers
+Worked on Chrome, Opera and Firefox. On Edge (38.14393.0.0), Search Box has not been worked, and on Internet Explorer 11, scrolling has not been synchronized with functions of Lines Box and Search Box. Other browsers have not been tested.
 
 2. OSs and Devices
 I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Devices. In these, this plugin works. But the "mousemove" event for moving "Sticker Box" may not be embedded in any devices. You may meet an issue of moving "Sticker Box".
@@ -100,16 +100,22 @@ GNU General Public License for more details.
 
 == Changelog ==
 
+This Changelog is including results of compatibility tests. These tests assume latest versions of Web Browsers as of the date written in each log, if additional version information doesn't been added to each name.
+
+= 0.9.9.1 Beta =
+* Changed method for detection of "textarea" tag to fit other scripts | Modified README.txt
+: April 8, 2017
+
 = 0.9.9 Beta =
 * Last Check for Release in WordPress.org
-* In IE (11) and FireFox (PC and Mobile), window scrolling has high fidelity, e.g. on Post Editor, push "Last" in Lines Box several times, then you can watch temporary scrolling to the top of the page and going back to the last of "textarea" tag. Besides, Chrome, Opera and Edge don't have this temporary scrolling. In my code, before refocusing to "textarea", I added window scrolling to the top. Therefore, IE and FireFox have right answer. But in my opinion, functionally, Chrome, Opera and Edge are right because such a temporary scrolling is ugly. I think this difference derived from the difference of graphic hardware usage (such as GPU) in browsers. Chrome, Opera and Edge use graphic hardware in addition to CPU for rendering graphic in these windows. IE and FireFox (the successor of Netscape Navigator) use graphic hardware as GPU Acceleration, but these are an option. Probably, this difference don't come from graphic hardware directly. But to adapt graphic hardware to themselves, Chrome, Opera and Edge seem to write codes around graphic more newly than IE and FireFox. Personally, I like IE and FireFox because these are truly giants of Internet before Millenium. But I have to suggest them to rewrite their codes around graphic to adapt graphic hardware much better than now. Particularly, FireFox is a front runner of Internet unlike IE. I should want FireFox to run towards the graphic front of Internet.
+* In IE (Internet Explorer 11) and FireFox, window scrolling has high fidelity, e.g. on Post Editor, push "Last" in Lines Box several times, then you can watch temporary scrolling to the top of the page and going back to the last of "textarea" tag. Besides, Chrome, Opera and Edge don't have this temporary scrolling. In my code, before refocusing to "textarea", I added window scrolling to the top (e.g. script-jimmy-editor-admin.js line No.387). Therefore, IE and FireFox have right answer. But in my opinion, functionally, Chrome, Opera and Edge are right because such a temporary scrolling is ugly. I think this difference derived from the difference of graphic improvement (such as hardware usage) in browsers. Chrome, Opera and Edge use graphic hardware in addition to CPU for rendering graphic more actively. IE and FireFox (the successor of Netscape Navigator) use graphic hardware as GPU Acceleration, but these are an option. Probably, this difference don't come from usage of graphic hardware directly. But to adapt graphic hardware to themselves, Chrome, Opera and Edge seem to write codes around graphic more newly than IE and FireFox. Personally, I like IE and FireFox because these are truly giants of Internet from Pre-Millenium. But I have to suggest them to rewrite their codes around graphic better than now. Particularly, FireFox is a front runner of Internet. I should want FireFox to run towards the graphic front of Internet.
 : April 6, 2017
 
 = 0.9.8 Beta =
 * Improved initial X Y positions of each Box | Modified Usability on Touching Device
 * Last Trial for Release in WordPress.org
 * (*Already Resolved by adding to reset window Y scroll in this version*) FireFox, IE and Edge's issue to hide top level of "textarea" tag when "Top" in Lines Box seems to scroll to the top of the "textarea", not the top of "form" tag (Parent of "textarea") in default, unlike Chrome and Opera. If wanting to fix this problem, make the function to jump to the top of "form" tag manually when "Top" and "Go" to low numbered lines.
-* Edge (38.14393.0.0)'s issue to stop searching and not to be able to search the next word in Search Box randomly seems tricky because in IE (11), searching is well done except scrolling. Edge is a de facto later version of IE. Plus, if you double click "Go" button, searching go ahead to the next word. The reason of this issue seems a pointing problem, reseting cursor positions and pointing the end of the text area, after focusing other elements (e.g. put cursor on any point in the text area then start search, it starts from the end of the text area). IE clears this problem. To avoid this issue, it is needed to make function to save previous cursor positions manually before focusing other elements. But I decided to stay this issues because of correctness in IE, a de facto earlier version of Edge.
+* Edge (version 38.14393.0.0)'s issue to stop searching and not to be able to search the next word in Search Box randomly seems tricky because in IE (Internet Explorer 11), searching is well done except scrolling. Edge is a de facto later version of IE. Plus, if you double click "Go" button, searching go ahead to the next word. The reason of this issue seems a pointing problem, resetting cursor positions and pointing the end of the text area, after focusing other elements (e.g. put cursor on any point in the text area then start search, it starts from the end of the text area then hits the first searched word of the text area). IE clears this problem. To avoid this issue, it is needed to make function to save previous cursor positions manually before focusing other elements. But I decided to stay this issue because of correctness in IE, a de facto earlier version of Edge. I'm going to report this issue to Microsoft for improvement of Edge.
 : April 5, 2017
 
 = 0.9.7 Beta =
@@ -135,14 +141,14 @@ GNU General Public License for more details.
 = 0.9.2 Beta =
 * Trial on Browsers | Added Folding Function
 * On FireFox (Android) Worked.
-* On Chrome (PC), Opera (PC), Chrome (Android), Opera (Android) Worked by adding refocusing the text area.
-* On IE (11), on Post Editor, scrolling has not been synchronized with Lines Box and Search Box.
-* On Edge (38.14393.0.0), an odd of scrolling similar to FireFox (PC), plus Search Box has not been worked, even though IE worked it. Lines Box and Style Box have been worked on Edge.
+* On Chrome (PC), Opera (PC), Chrome (Android) and Opera (Android) Worked by adding refocusing the text area and dummy editing of text.
+* On IE (Internet Explorer 11), scrolling has not been synchronized with functions of Lines Box and Search Box.
+* On Edge (version 38.14393.0.0), an issue of scrolling similar to FireFox (PC version 52.0.1) exists, plus Search Box has not been worked. Lines Box and Style Box have been worked on Edge.
 : March 21, 2017
 
 = 0.9.1 Beta =
 * Added Font | Background-color Style Changer
-* On FireFox (PC V.52.0.1) Worked; but on Post Editor, scrolling has an odd, e.g., when clicking "Top", not showing the top level of the text area.
+* On FireFox (PC version 52.0.1) Worked. But on Post Editor, scrolling has an issue, e.g., when clicking "Top", not showing the top level of the text area.
 : March 19, 2017
 
 = 0.9 Beta =

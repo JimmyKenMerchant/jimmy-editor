@@ -1,6 +1,6 @@
 /* Default for post editor */
 div#wp-content-editor-container textarea#content {
-	background-color: #00f;
+	background-color: #000;
 	color: #fff;
 	font-family: monospace;
 	font-weight: 700;
@@ -9,7 +9,7 @@ div#wp-content-editor-container textarea#content {
 
 /* Default for theme or plugin editor */
 form#template textarea#newcontent {
-	background-color: #00f;
+	background-color: #000;
 	color: #fff;
 	font-family: monospace;
 	font-weight: 700;

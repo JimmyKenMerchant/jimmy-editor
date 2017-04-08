@@ -9,23 +9,22 @@
 	var g_sticker_flag = 0;
 	// variable $target_area should be global
 	var $target_area = {};
-	if ($("#content").length !== 0) {
+	if ($('#content').length === 1) {
 	// Post Editor
-		$target_area = $("#content");
-	} else if ($("#newcontent").length !== 0) {
+		$target_area = $('#content');
+	} else if ($('#newcontent').length === 1) {
 	// Theme or Plugin Editor
-		$target_area = $("#newcontent");
-	} else {
-	// Nothing of Both
-		return true;
+		$target_area = $('#newcontent');
 	}
 
-	// First and Second Arguments are X and Y percentages to Window of your Browser
-	// Last Argument needs unique number except 0
-	stopClickEvent();
-	styleBox("40%", "40%", 1);
-	searchBox("45%", "45%", 2);
-	linesBox("50%", "50%", 3);
+	if ($target_area.length === 1) {
+		// First and Second Arguments are X and Y percentages to Window of your Browser
+		// Last Argument needs unique number except 0
+		stopClickEvent();
+		styleBox("40%", "40%", 1);
+		searchBox("45%", "45%", 2);
+		linesBox("50%", "50%", 3);
+	}
 
 
 	/*
