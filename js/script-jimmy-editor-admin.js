@@ -1,9 +1,10 @@
-/* 
- * Sticker Box, a Movable Web Menus @jimmy-editor
- * Author: Kenta Ishii, Tokyo
- * Copyright 2017 Kenta Ishii. All Rights Reserved.
+/*
+ * script-jimmy-editor-admin.js in Jimmy Editor, a WordPress plugin
+ * @package Jimmy Codeviewer
+ * @author Kenta Ishii
  * License: GPLv2 or late
  */
+
 (function($) {
 
 	var g_sticker_flag = 0;

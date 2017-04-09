@@ -23,7 +23,7 @@ Web Browser Based Applications (Web Apps) has a good key to the future because i
 
 == Tutorial ==
 
-1. General
+1. Brief
 
 Touch or click Magenta Label on "Sticker Box", then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Stick it where you want, by touching or clicking Magenta Label again. You can hide "Sticker Box" by touching or clicking Cyan Triangle. You can reshow "Sticker Box" by touch or click your text area. Light Cyan Label is its text, and if you touch or click it, "Sticker Box" will show Function. White Label is a input area where you can write parameters of functions on "Sticker Box". Yellow Label is a button to command Function.
 
@@ -102,20 +102,24 @@ GNU General Public License for more details.
 
 This Changelog is including results of compatibility tests. These tests assume latest versions of Web Browsers as of the date written in each log, if additional version information doesn't been added to each name.
 
+= 0.9.9.2 Beta =
+* Reviewed comments | Modified post-editor-patch.js
+: April 9, 2017
+
 = 0.9.9.1 Beta =
 * Changed method for detection of "textarea" tag to fit other scripts | Modified README.txt
 : April 8, 2017
 
 = 0.9.9 Beta =
 * Last Check for Release in WordPress.org
-* In IE (Internet Explorer 11) and FireFox, window scrolling has high fidelity, e.g. on Post Editor, push "Last" in Lines Box several times, then you can watch temporary scrolling to the top of the page and going back to the last of "textarea" tag. Besides, Chrome, Opera and Edge don't have this temporary scrolling. In my code, before refocusing to "textarea", I added window scrolling to the top (e.g. script-jimmy-editor-admin.js line No.387). Therefore, IE and FireFox have right answer. But in my opinion, functionally, Chrome, Opera and Edge are right because such a temporary scrolling is ugly. I think this difference derived from the difference of graphic improvement (such as hardware usage) in browsers. Chrome, Opera and Edge use graphic hardware in addition to CPU for rendering graphic more actively. IE and FireFox (the successor of Netscape Navigator) use graphic hardware as GPU Acceleration, but these are an option. Probably, this difference don't come from usage of graphic hardware directly. But to adapt graphic hardware to themselves, Chrome, Opera and Edge seem to write codes around graphic more newly than IE and FireFox. Personally, I like IE and FireFox because these are truly giants of Internet from Pre-Millenium. But I have to suggest them to rewrite their codes around graphic better than now. Particularly, FireFox is a front runner of Internet. I should want FireFox to run towards the graphic front of Internet.
+* In IE (Internet Explorer 11) and Firefox, window scrolling has high fidelity, e.g. on Post Editor, push "Last" in Lines Box several times, then you can watch temporary scrolling to the top of the page and going back to the last of "textarea" tag. Besides, Chrome, Opera and Edge don't have this temporary scrolling. In my code, before refocusing to "textarea", I added window scrolling to the top (e.g. script-jimmy-editor-admin.js line No.387). Therefore, IE and Firefox have right answer. But in my opinion, functionally, Chrome, Opera and Edge are right because such a temporary scrolling is ugly. I think this difference derived from the difference of graphic improvement (such as hardware usage) in browsers. Chrome, Opera and Edge use graphic hardware in addition to CPU for rendering graphic more actively. IE and Firefox (the successor of Netscape Navigator) use graphic hardware as GPU Acceleration, but these are an option. Probably, this difference don't come from usage of graphic hardware directly. But to adapt graphic hardware to themselves, Chrome, Opera and Edge seem to write codes around graphic more newly than IE and Firefox. Personally, I like IE and Firefox because these are truly giants of Internet from Pre-Millenium. But I have to suggest them to rewrite their codes around graphic better than now. Particularly, Firefox is a front runner of Internet. I should want Firefox to run towards the graphic front of Internet.
 : April 6, 2017
 
 = 0.9.8 Beta =
 * Improved initial X Y positions of each Box | Modified Usability on Touching Device
 * Last Trial for Release in WordPress.org
-* (*Already Resolved by adding to reset window Y scroll in this version*) FireFox, IE and Edge's issue to hide top level of "textarea" tag when "Top" in Lines Box seems to scroll to the top of the "textarea", not the top of "form" tag (Parent of "textarea") in default, unlike Chrome and Opera. If wanting to fix this problem, make the function to jump to the top of "form" tag manually when "Top" and "Go" to low numbered lines.
-* Edge (version 38.14393.0.0)'s issue to stop searching and not to be able to search the next word in Search Box randomly seems tricky because in IE (Internet Explorer 11), searching is well done except scrolling. Edge is a de facto later version of IE. Plus, if you double click "Go" button, searching go ahead to the next word. The reason of this issue seems a pointing problem, resetting cursor positions and pointing the end of the text area, after focusing other elements (e.g. put cursor on any point in the text area then start search, it starts from the end of the text area then hits the first searched word of the text area). IE clears this problem. To avoid this issue, it is needed to make function to save previous cursor positions manually before focusing other elements. But I decided to stay this issue because of correctness in IE, a de facto earlier version of Edge. I'm going to report this issue to Microsoft for improvement of Edge.
+* (*Already Resolved by adding to reset window Y scroll in this version*) Firefox, IE and Edge's issue to hide top level of "textarea" tag when "Top" in Lines Box seems to scroll to the top of the "textarea", not the top of "form" tag (Parent of "textarea") in default, unlike Chrome and Opera. If wanting to fix this problem, make the function to jump to the top of "form" tag manually when "Top" and "Go" to low numbered lines.
+* Edge (version 38.14393.0.0)'s issue to stop searching and not to be able to search the next word in Search Box randomly seems tricky because in IE (Internet Explorer 11), searching is well done except scrolling. Edge is a de facto later version of IE. Plus, if you double click "Go" button, searching go ahead to the next word. The reason of this issue seems a pointing problem, resetting cursor positions and pointing the end of the text area, after focusing other elements (e.g. put cursor on any point in the text area then start search, it starts from the end of the text area then hits the first searched word of the text area). IE clears this problem. To avoid this issue, it is needed to make function to save previous cursor positions manually before focusing other elements. But I decided to stay this issue because of correctness in IE, a de facto earlier version of Edge. I'm going to report this issue to Microsoft for the improvement of Edge.
 : April 5, 2017
 
 = 0.9.7 Beta =
@@ -140,15 +144,15 @@ This Changelog is including results of compatibility tests. These tests assume l
 
 = 0.9.2 Beta =
 * Trial on Browsers | Added Folding Function
-* On FireFox (Android) Worked.
+* On Firefox (Android) Worked.
 * On Chrome (PC), Opera (PC), Chrome (Android) and Opera (Android) Worked by adding refocusing the text area and dummy editing of text.
 * On IE (Internet Explorer 11), scrolling has not been synchronized with functions of Lines Box and Search Box.
-* On Edge (version 38.14393.0.0), an issue of scrolling similar to FireFox (PC version 52.0.1) exists, plus Search Box has not been worked. Lines Box and Style Box have been worked on Edge.
+* On Edge (version 38.14393.0.0), an issue of scrolling similar to Firefox (PC version 52.0.1) exists, plus Search Box has not been worked. Lines Box and Style Box have been worked on Edge.
 : March 21, 2017
 
 = 0.9.1 Beta =
 * Added Font | Background-color Style Changer
-* On FireFox (PC version 52.0.1) Worked. But on Post Editor, scrolling has an issue, e.g., when clicking "Top", not showing the top level of the text area.
+* On Firefox (PC version 52.0.1) Worked. But on Post Editor, scrolling has an issue, e.g., when clicking "Top", not showing the top level of the text area.
 : March 19, 2017
 
 = 0.9 Beta =

@@ -1,3 +1,7 @@
+/*--------------------------------------------------------------
+Jimmy Editor
+--------------------------------------------------------------*/
+
 /* Default for post editor */
 div#wp-content-editor-container textarea#content {
 	background-color: #000;
@@ -15,4 +19,3 @@ form#template textarea#newcontent {
 	font-weight: 700;
 	font-size: 1.1em;
 }
-
