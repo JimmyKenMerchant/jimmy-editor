@@ -30,7 +30,7 @@
 
 	/*
 	 * lines Box Construction
-	 * Line and Number Detection and Search
+	 * Line and Character Number Detection and Search
 	 */
 	function linesBox(x_pos, y_pos, order_num) {
 		// If moved already, retrieves its position
@@ -251,7 +251,7 @@
 		$("<input>").attr({
 					"id": "lines-input",
 					"type": "text",
-					"value": "L:N?"
+					"value": "L:C?"
 					}
 				)
 				.css({
@@ -332,51 +332,66 @@
 		$target_area.bind('click.jimmy-editor_lines_showbox', function(e) {
 	
 			var el = e.target;
-			var sel_start = el.selectionStart;
+			var sel_end = el.selectionEnd;
 			var val = el.value;
 	
-			var cal = val.substr(0, sel_start).split("\n");
+			var cal = val.substr(0, sel_end).split("\n");
 			var lines_n = cal.length;
-			var num_n = cal[ cal.length - 1 ].length;
+			var num_n = cal[cal.length - 1].length;
 	
-			$("#lines-text").text("L: " + lines_n + "\r\n" + "N: " + num_n);
+			$("#lines-text").text("L: " + lines_n + "\r\n" + "C: " + num_n);
 	
 			$("#lines-box").css("visibility", "visible");
 
 			return false;
 		});
 
-		$('#lines-button1').bind('click.jimmy-editor_lines', function(e) {
+		$target_area.bind('keyup.jimmy-editor_lines_showbox', function(e) {
+	
+			$target_area.trigger('click.jimmy-editor_lines_showbox');
+
+			return false;
+		});
+
+		$('#lines-button1').bind('click.jimmy-editor_lines_main', function(e) {
 			var val_input = $('#lines-input').val();
-			if(val_input == parseInt(val_input)) {
+			if (val_input == parseInt(val_input)) {
 				var lines_n = parseInt(val_input) - 1;
 				var num_n = 0;
 			} else {
 				val_input = val_input.split(":", 2);
 				if (val_input[0] === "" || val_input[1] === "") {
+					$target_area[0].focus();
 					return false;
 				} else {
-					var lines_n = parseInt(val_input[0]) - 1;
+					var lines_n = parseInt(val_input[0]);
 					var num_n = parseInt(val_input[1]);
+					if (isNaN(lines_n) || isNaN(num_n)) {
+						$target_area[0].focus();
+						return false;
+					} else {
+						lines_n--;
+					}
 				}
 			}
 
-			$('#lines-input').val("L:N?");
+			$('#lines-input').val("L:C?");
 			var val = $target_area[0].value;
 			var cal = val.substr(0).split("\n");
 
 			// If lines is overflowed length of text
 			var ck_length = lines_n + 1;
-			if(cal.length < ck_length) {
+			if (cal.length < ck_length) {
+				$target_area[0].focus();
 				return false;
 			}
 			// If number is overflowed length of line
-			if(cal[lines_n].length < num_n) {
+			if (cal[lines_n].length < num_n) {
 				num_n = cal[lines_n].length;
 			}
 
 			var dest = 0;
-			for(var i=0; i < lines_n; i++){
+			for (var i=0; i < lines_n; i++) {
 				dest += cal[i].length + 1;
 			}
 
@@ -395,22 +410,30 @@
 			$target_area[0].value = front_v + " " + rear_v;
 			$target_area[0].value = front_v + rear_v;
 
-			if(cal[lines_n].length === num_n) {
+			if (num_n === 0) {
 				$target_area[0].selectionStart = dest;
 				$target_area[0].selectionEnd = dest;
 			} else {
-				$target_area[0].selectionStart = dest;
-				$target_area[0].selectionEnd = dest + 1;
+				$target_area[0].selectionStart = dest -1;
+				$target_area[0].selectionEnd = dest;
 			}
 
 			lines_n++;
 	
-			$("#lines-text").text("L: " + lines_n + "\r\n" + "N: " + num_n);
+			$("#lines-text").text("L: " + lines_n + "\r\n" + "C: " + num_n);
 
 			return false;
 		});
 
-		$('#lines-button2').bind('click.jimmy-editor_top', function(e) {
+		$('#lines-input').bind('keydown.jimmy-editor_lines_main', function(e) {
+			if (e.keyCode == 13) { // enter key
+				e.preventDefault();
+				$('#lines-button1').trigger('click.jimmy-editor_lines_main');
+				return false;
+			}
+		});
+
+		$('#lines-button2').bind('click.jimmy-editor_lines_top', function(e) {
 			$target_area[0].selectionStart = 0;
 			$target_area[0].selectionEnd = 0;
 
@@ -419,12 +442,12 @@
 			$('#lines-input').focus();
 			$target_area[0].focus();
 
-			$("#lines-text").text("L: " + 1 + "\r\n" + "N: " + 0);
+			$("#lines-text").text("L: " + 1 + "\r\n" + "C: " + 0);
 
 			return false;
 		});
 
-		$('#lines-button3').bind('click.jimmy-editor_last', function(e) {
+		$('#lines-button3').bind('click.jimmy-editor_lines_last', function(e) {
 			var val = $target_area[0].value;	
 			$target_area[0].selectionStart = val.length;
 			$target_area[0].selectionEnd = val.length;
@@ -435,17 +458,9 @@
 			$target_area[0].focus();
 
 			var cal = val.substr(0).split("\n");
-			$("#lines-text").text("L: " + cal.length + "\r\n" + "N: " + cal[cal.length - 1].length);
+			$("#lines-text").text("L: " + cal.length + "\r\n" + "C: " + cal[cal.length - 1].length);
 
 			return false;
-		});
-
-		$('#lines-input').bind('keydown.jimmy-editor_lines', function(e) {
-			if ( e.keyCode == 13 ) { // enter key
-				e.preventDefault();
-				$('#lines-button1').trigger('click.jimmy-editor_lines');
-				return false;
-			}
 		});
 
 		$('body').bind('mousemove.jimmy-editor_lines', function(e) {
@@ -900,7 +915,7 @@
 		var the_search_regex = {};
 		var the_val_replace = "";
 		var the_past = [];
-		$('#search-button2').bind('click.jimmy-editor_search', function(e) {
+		$('#search-button2').bind('click.jimmy-editor_search_main', function(e) {
 			var temp_search = $('#search-input1').val();
 			if (the_val_search !== temp_search) {
 				the_val_search = temp_search;
@@ -918,6 +933,7 @@
 			}
 
 			if (the_val_search === "") {
+				$target_area[0].focus();
 				return false;
 			}		
 
@@ -1151,6 +1167,14 @@
 			return false;
 		});
 
+		$('.search-input').bind('keydown.jimmy-editor_search_main', function(e) {
+			if (e.keyCode == 13) { // enter key
+				e.preventDefault();
+				$('#search-button2').trigger('click.jimmy-editor_search_main');
+				return false;
+			}
+		});
+
 		// Undo
 		$('#search-button3').bind('click.jimmy-editor_search_undo', function(e) {
 
@@ -1195,14 +1219,6 @@
 			$target_area.trigger('click.jimmy-editor_lines_showbox');
 
 			return false;
-		});
-
-		$('.search-input').bind('keydown.jimmy-editor_search', function(e) {
-			if ( e.keyCode == 13 ) { // enter key
-				e.preventDefault();
-				$('#search-button2').trigger('click.jimmy-editor_search');
-				return false;
-			}
 		});
 
 		$('body').bind('mousemove.jimmy-editor_search', function(e) {
@@ -1541,7 +1557,7 @@
 			return false;	
 		});
 
-		$('#style-button1').bind('click.jimmy-editor_style', function(e) {
+		$('#style-button1').bind('click.jimmy-editor_style_main', function(e) {
 			if ($('#style-input1').val() !== "" ) {
 				var font_color = $('#style-input1').val();
 			} else {
@@ -1590,10 +1606,10 @@
 			return false;
 		});
 
-    		$('.style-input').bind('keydown.jimmy-editor_style', function(e) {
-			if ( e.keyCode == 13 ) { // enter key
+    		$('.style-input').bind('keydown.jimmy-editor_style_main', function(e) {
+			if (e.keyCode == 13) { // enter key
 				e.preventDefault();
-				$('#style-button1').trigger('click.jimmy-editor_style');
+				$('#style-button1').trigger('click.jimmy-editor_style_main');
 				return false;
 			}
 		});

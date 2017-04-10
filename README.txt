@@ -17,7 +17,7 @@ Jimmy Editor, a WordPress plugin, is a suggestion that you have freedom of makin
 
 == Description ==
 
-Jimmy Editor is a plugin for patching default editors of WordPress. The beginning of this plugin was from my thought, "how can I use the tab key to insert a indent on Post Editor (Text Mode) as well as Plugin and Theme Editor?" This is resolved by "post-editor-patch.js", because this issue is derived from ID naming for "textarea" tag. In addition, I tried to make some editorial functions: "Line number detection", "search, replace and delete of the word in the text" and "style changer for the text area" are considered. Plus, I also considered some movable interface for these functions on Web browsers. I named my movable interface to "Sticker Box". It's not only like the window system on your PC, but able to work on your tablet or phone. I can say that my movable interface is making compatibility between mouse pointers and touching devices, because my movable interface is using universal trigger, "mousemove" which used to occur on many touching panels on mobile devices, but not all, to make compatibility with traditional mouse system on PC.
+Jimmy Editor is a plugin for patching default editors of WordPress. The beginning of this plugin was from my thought, "how can I use the tab key to insert a indent on Post Editor ("Text" mode) as well as Plugin and Theme Editor?" This is resolved by "post-editor-patch.js", because this issue is derived from ID naming for "textarea" tag. In addition, I tried to make some editorial functions: "Line number detection", "search, replace and delete of the word in the text" and "style changer for the text area" are considered. Plus, I also considered some movable interface for these functions on Web browsers. I named my movable interface to "Sticker Box". It's not only like the window system on your PC, but able to work on your tablet or phone. I can say that my movable interface is making compatibility between mouse pointers and touching devices, because my movable interface is using universal trigger, "mousemove" which used to occur on many touching panels on mobile devices, but not all, to make compatibility with traditional mouse system on PC.
 
 Web Browser Based Applications (Web Apps) has a good key to the future because its compatibility has better than Computer Based Applications (Native Apps). If You make one Web App, your Web App works on every browser in every platform. But it's ideal — many developers are trying this, then finding some issues — and browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in your computer. Because computers are having big memory and good speed these days, it's time to open the door to the future of Web Apps. I'm now trying to make ideal Web App
 
@@ -29,7 +29,7 @@ Touch or click Magenta Label on "Sticker Box", then you touch another point or m
 
 2. Lines Box
 
-Touch or click your text area, then you can know how many lines and numbers the caret in your text is placed on. Type lines and/or numbers on White Label and touch or click "Go" or press Enter so that your caret moves where you want, e.g., typing "20:6" means your caret moves to the 20th line and the 6th word. Typing "3" means your caret moves to the 3rd line and its beginning.
+Touch or click your text area, then you can know where the caret in your text is placed on. Type the line number and/or the character number on White Label and touch or click "Go" or press Enter so that your caret moves where you want, e.g., typing "20:6" means your caret moves to the 20th line and the 6th character of the line. Typing "3" means the caret moves to the 3rd line and its beginning.
 
 Touch or click "Top" to take your caret to the top of your text area.
 
@@ -57,7 +57,7 @@ This Search Box is searching the word by JavaScript's Regular Expression. Type y
 
 Each current status is indicated on White Label. The top is font color, the middle is font size and font weight, the bottom is background color.
 
-On Top and Bottom: Type color code by Hexadecimal style (e.g. "#89abcd") or just as displayed (e.g. "rgb(123,213,132)") to change font and background color.
+On Top and Bottom: Type color code by Hexadecimal style (e.g. "#89abcd") or just as displayed [e.g. "rgb(123,213,132)"] to change font and background color.
 
 On Middle: Type font size and font weight. Connect these by one colon, e.g, "14px:bold" means font size will be 14px and font weight will be bold (typically shows "700" numerically as a result). Typing "14px" means font size will be 14px and font weight will not be changed. Typing ":400" means font size will not be changed and font weight will be 400.
 
@@ -77,7 +77,7 @@ When any Box has been moving by clicking Magenta Label, and Cyan Triangle has be
 Worked on Chrome, Opera and Firefox. On Edge (38.14393.0.0), Search Box has not been worked, and on Internet Explorer 11, scrolling has not been synchronized with functions of Lines Box and Search Box. Other browsers have not been tested.
 
 2. OSs and Devices
-I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Devices. In these, this plugin works. But the "mousemove" event for moving "Sticker Box" may not be embedded in any devices. You may meet an issue of moving "Sticker Box".
+I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Device. In these, this plugin works. But the "mousemove" event for moving "Sticker Box" may not be embedded in any mobile device. You may meet an issue of moving "Sticker Box".
 
 == Installation ==
 
@@ -101,6 +101,11 @@ GNU General Public License for more details.
 == Changelog ==
 
 This Changelog is including results of compatibility tests. These tests assume latest versions of Web Browsers as of the date written in each log, if additional version information doesn't been added to each name.
+
+= 0.9.9.3 Beta =
+* Added indication of the line number and the character number when the keyup event
+* Set the default mode of Post Editor to "Text" mode
+: April 10, 2017
 
 = 0.9.9.2 Beta =
 * Reviewed comments | Modified post-editor-patch.js
