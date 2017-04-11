@@ -1,5 +1,5 @@
 === Jimmy Editor ===
-Contributors: jimmyken
+Contributors: kenjmk7r9merchant
 Plugin Name: Jimmy Editor
 Plugin URI: http://electronics.jimmykenmerchant.com/jimmy-editor/
 Tags: admin, admin-menu, administrator, administrator-menu, menu, editor, post-editor, posts-editor, theme-editor, themes-editor, plugin-editor, plugins-editor
