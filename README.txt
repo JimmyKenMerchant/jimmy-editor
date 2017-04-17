@@ -7,27 +7,30 @@ Author: Kenta Ishii
 Author URI: http://electronics.jimmykenmerchant.com
 Requires at least: WordPress 4.8-trunk
 Tested up to: WordPress 4.7.3
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-== Summary ==
+== Description ==
+
+= Summary =
 
 Jimmy Editor, a WordPress plugin, is a suggestion that you have freedom of making Web Browser Based Applications (Web Apps). Movable Graphical Interfaces in Web browsers, I called it as "Sticker Box", makes your plot for Web Apps to be layout free and improve its usability. In this plugin, "Sticker Box" is used as a bunch of editor tools, "Lines Box", "Search Box" and "Style Box". This tools gives you how well "Sticker Box" works in Web browsers.
 
-== Description ==
+= Instruction =
 
 Jimmy Editor is a plugin for patching default editors of WordPress. The beginning of this plugin was from my thought, "how can I use the tab key to insert a indent on Post Editor ("Text" mode) as well as Plugin and Theme Editor?" This is resolved by "post-editor-patch.js", because this issue is derived from ID naming for "textarea" tag. In addition, I tried to make some editorial functions: "Line number detection", "search, replace and delete of the word in the text" and "style changer for the text area" are considered. Plus, I also considered some movable interface for these functions on Web browsers. I named my movable interface to "Sticker Box". It's not only like the window system on your PC, but able to work on your tablet or phone. I can say that my movable interface is making compatibility between mouse pointers and touching devices, because my movable interface is using universal trigger, "mousemove" which used to occur on many touching panels on mobile devices, but not all, to make compatibility with traditional mouse system on PC.
 
-Web Browser Based Applications (Web Apps) has a good key to the future because its compatibility has better than Computer Based Applications (Native Apps). If You make one Web App, your Web App works on every browser in every platform. But it's ideal — many developers are trying this, then finding some issues — and browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in your computer. Because computers are having big memory and good speed these days, it's time to open the door to the future of Web Apps. I'm now trying to make ideal Web App
+Web Browser Based Applications (Web Apps) has a good key to the future because its compatibility has better than Computer Based Applications (Native Apps). If You make one Web App, your Web App works on every browser in every platform. But it's ideal — many developers are trying this, then finding some issues — and browsers are growing their performances. In fact, it's a heavy loader, a big owner of memory in your computer. Because computers are having big memory and good speed these days, it's time to open the door to the future of Web Apps. I'm now trying to make ideal Web App!
 
-== Tutorial ==
+= Tutorial =
 
-1. Brief
+I. Brief
 
 Touch or click Magenta Label on "Sticker Box", then you touch another point or move your mouse. You can see the movable menu, "Sticker Box". Stick it where you want, by touching or clicking Magenta Label again. You can hide "Sticker Box" by touching or clicking Cyan Triangle. You can reshow "Sticker Box" by touch or click your text area. Light Cyan Label is its text, and if you touch or click it, "Sticker Box" will show Function. White Label is a input area where you can write parameters of functions on "Sticker Box". Yellow Label is a button to command Function.
 
-2. Lines Box
+
+II. Lines Box
 
 Touch or click your text area, then you can know where the caret in your text is placed on. Type the line number and/or the character number on White Label and touch or click "Go" or press Enter so that your caret moves where you want, e.g., typing "20:6" means your caret moves to the 20th line and the 6th character of the line. Typing "3" means the caret moves to the 3rd line and its beginning.
 
@@ -35,7 +38,8 @@ Touch or click "Top" to take your caret to the top of your text area.
 
 Touch or click "Last" to take your caret to the bottom of your text area.
 
-3. Search Box
+
+III. Search Box
 
 Change Command by touching or clicking "Select" which toggles "Search", "Replace", "Delete".
 
@@ -53,7 +57,8 @@ If "Back" is active, you can undo these commands. "Back" is only up to 40 times 
 
 This Search Box is searching the word by JavaScript's Regular Expression. Type your search word by the rule of Regular Expression without delimiters, and select "m" (multi-lines modifier for use "^", "$" on each lines), and/or "i" (ignore cases). "g" is never be used because this modifier for all replacing words on one time [String.prototype.replace()], or get all matching words on one time [String.prototype.match()].
 
-4. Style Box
+
+IV. Style Box
 
 Each current status is indicated on White Label. The top is font color, the middle is font size and font weight, the bottom is background color.
 
@@ -63,27 +68,34 @@ On Middle: Type font size and font weight. Connect these by one colon, e.g, "14p
 
 Then touch or click "Change" or press Enter.
 
-5. Position and Style Saving
+
+V. Position and Style Saving
 
 Positions of Boxes and the style changed by Style Box will be saved. But these have limitation. If you close your browser or current window, saved positions will be erased.
 
-6. Stop Default Click Events when "Sticker Box" Moving is on Active
+
+VI. Stop Default Click Events when "Sticker Box" Moving is on Active
 
 When any Box has been moving by clicking Magenta Label, and Cyan Triangle has been changed to Square, default click events will be stopped for usability of moving "Sticker Box", particularly on touching devices to stop opening links to other pages. If you want retrieve default click events, click Cyan Square of any "Sticker Box" to change to Triangle.
 
-== Compatibility ==
+= Compatibility =
 
-1. Web Browsers
+I. Web Browsers
 Worked on Chrome, Opera and Firefox. On Edge (38.14393.0.0), Search Box has not been worked, and on Internet Explorer 11, scrolling has not been synchronized with functions of Lines Box and Search Box. Other browsers have not been tested.
 
-2. OSs and Devices
+
+II. OSs and Devices
 I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Device. In these, this plugin works. But the "mousemove" event for moving "Sticker Box" may not be embedded in any mobile device. You may meet an issue of moving "Sticker Box".
 
 == Installation ==
 
-Jimmy Editor is a plugin under the terms of the GNU GPL. If you have some curious to this plugin, you can download and test it from GitHub public repository. https://github.com/JimmyKenMerchant/jimmy-editor/
+From "Plugins" of your admin page, just search and install "Jimmy Editor". Make sure to activate "Jimmy Editor" in "Installed Plugins", a "Plugins" sub menu.
 
-== Copyright ==
+You can download and test developing version of this plugin from GitHub public repository. https://github.com/JimmyKenMerchant/jimmy-editor/
+
+In my experience, wp_enqueue_script where deps as array('jquery') was wrong for adding scripts of jQuery on both the normal page and the admin page. By typing "true" on the last argument of wp_enqueue_script, the script will be on the footer. This may be good for your scripts of jQuery because jQuery usually handles HTML DOM (Document Object Model) which needs to be loaded.
+
+= Copyright =
 
 The Jimmy Editor, A WordPress Plugin, Copyright 2017 Kenta Ishii
 Jimmy Editor is distributed under the terms of the GNU GPL
@@ -98,9 +110,29 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
+== Frequently Asked Questions ==
+
+= What will you do here in the future? =
+
+I'm thinking of making another editor in this plugin. This would be embedded to default editor. If you have some curious, please note in the support forum of this plugin.
+
+== Upgrade Notice ==
+
+= 1.0.1 =
+Please upgrade because of fixing bugs.
+
 == Changelog ==
 
 This Changelog is including results of compatibility tests. These tests assume latest versions of Web Browsers as of the date written in each log, if additional version information doesn't been added to each name.
+
+= 1.0.1 =
+* Fixed Bug that when you want to replace some word which includes the target word; particularly, replacing stops
+* Added minimized files of JavaScript
+: April 17, 2017
+
+= 1.0 =
+* Release in WordPress.org
+: April 17, 2017
 
 = 0.9.9.3 Beta =
 * Added indication of the line number and the character number when the keyup event

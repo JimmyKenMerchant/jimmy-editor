@@ -1,4 +1,4 @@
-/*
+/**
  * post-editor-patch.js in Jimmy Editor, a WordPress plugin
  * Source from wp-admin/js/common.js line No.516 (WordPress 4.7.3)
  * @package Jimmy Codeviewer
@@ -6,7 +6,7 @@
  * License: GPLv2 or late
  */
 
-/*
+/**
  * common.js is loaded by wp-admin/load-scripts.php on admin contents.
  * Post Editor loads common.js, even though tab indent has not been functioned.
  */

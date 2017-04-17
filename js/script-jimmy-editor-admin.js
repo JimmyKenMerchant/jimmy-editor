@@ -1,4 +1,4 @@
-/*
+/**
  * script-jimmy-editor-admin.js in Jimmy Editor, a WordPress plugin
  * @package Jimmy Codeviewer
  * @author Kenta Ishii
@@ -28,7 +28,7 @@
 	}
 
 
-	/*
+	/**
 	 * lines Box Construction
 	 * Line and Character Number Detection and Search
 	 */
@@ -478,7 +478,7 @@
 	}
 
 
-	/*
+	/**
 	 * Search Box Construction
 	 * Search, Replace or Delete Word
 	 */
@@ -687,6 +687,8 @@
 				}
 			)
 			.click( function() {
+					// Rewind for Replace or Delete after Search
+					the_nextstart = $target_area[0].selectionStart;
 					if (the_select_flag === 0) {
 						the_select_flag = 1;
 						$("#search-text").text("Replace");
@@ -951,11 +953,8 @@
 				}
 				the_search_regex = new RegExp(the_val_search, modi);
 
-				// Check current select is the target or not
-				// for replacing after searching
-				var pre_length = $target_area[0].selectionEnd - $target_area[0].selectionStart;
-				var pre_cal = val.substr($target_area[0].selectionStart, pre_length).search(the_search_regex);
-				if (pre_cal === 0) {
+				// Check the last action
+				if (the_past[the_past.length - 1] === -1) {
 					the_nextstart = $target_area[0].selectionStart;
 				}
 
@@ -1031,11 +1030,8 @@
 				}
 				the_search_regex = new RegExp(the_val_search, modi);
 
-				// Check current select is the target or not
-				// for deleting after searching
-				var pre_length = $target_area[0].selectionEnd - $target_area[0].selectionStart;
-				var pre_cal = val.substr($target_area[0].selectionStart, pre_length).search(the_search_regex);
-				if (pre_cal === 0) {
+				// Check the last action
+				if (the_past[the_past.length - 1] === -1) {
 					the_nextstart = $target_area[0].selectionStart;
 				}
 
@@ -1236,7 +1232,7 @@
 	}
 
 
-	/*
+	/**
 	 * Style Box Construction
 	 * font color, font sytle and background color
 	 */
@@ -1629,7 +1625,7 @@
 	}
 
 
-	/*
+	/**
 	 * Stop Click Event when "Sticker Box" moving is on active
 	 */
 	function stopClickEvent() {
