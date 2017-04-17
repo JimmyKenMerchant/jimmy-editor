@@ -5,15 +5,13 @@ Plugin URI: http://electronics.jimmykenmerchant.com/jimmy-editor/
 Tags: admin, admin-menu, administrator, administrator-menu, menu, editor, post-editor, posts-editor, theme-editor, themes-editor, plugin-editor, plugins-editor
 Author: Kenta Ishii
 Author URI: http://electronics.jimmykenmerchant.com
-Requires at least: WordPress 4.8-trunk
-Tested up to: WordPress 4.7.3
+Requires at least: 4.7.3
+Tested up to: 4.7.3
 Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-
-= Summary =
 
 Jimmy Editor, a WordPress plugin, is a suggestion that you have freedom of making Web Browser Based Applications (Web Apps). Movable Graphical Interfaces in Web browsers, I called it as "Sticker Box", makes your plot for Web Apps to be layout free and improve its usability. In this plugin, "Sticker Box" is used as a bunch of editor tools, "Lines Box", "Search Box" and "Style Box". This tools gives you how well "Sticker Box" works in Web browsers.
 
