@@ -687,8 +687,6 @@
 				}
 			)
 			.click( function() {
-					// Rewind for Replace or Delete after Search
-					the_nextstart = $target_area[0].selectionStart;
 					if (the_select_flag === 0) {
 						the_select_flag = 1;
 						$("#search-text").text("Replace");
