@@ -251,7 +251,7 @@
 		$("<input>").attr({
 					"id": "lines-input",
 					"type": "text",
-					"value": "L:C?"
+					"placeholder": "L:C?"
 					}
 				)
 				.css({
@@ -265,10 +265,6 @@
 					"height": "2.0rem",
 					"background-color": "#fff",
 					"color": "#000"
-					}
-				)
-				.click( function() {
-						$(this).val([]);
 					}
 				)
 				.appendTo($("#lines-wrap"));
@@ -286,6 +282,7 @@
 				"height": "2.0rem",
 				"background-color": "#ff0",
 				"color": "#000",
+				"border-bottom": "1px solid #aaa",
 				"transition": "background-color 0.5s"
 				}
 			)
@@ -314,6 +311,7 @@
 				"height": "2.0rem",
 				"background-color": "#ff0",
 				"color": "#000",
+				"border-bottom": "1px solid #aaa",
 				"transition": "background-color 0.5s"
 				}
 			)
@@ -328,6 +326,62 @@
 						}
 			)
 			.text("Last");
+
+		$("<div>").appendTo($("#lines-wrap"))
+			.attr("id", "lines-button4")
+			.css({
+				"display": "inline-block",
+				"vertical-align": "top",
+				"line-height": "1.8rem",
+				"text-align": "center",
+				"font-size": "1.0rem",
+				"font-weight": "bold",
+				"width": "3.0rem",
+				"height": "2.0rem",
+				"background-color": "#ff0",
+				"color": "#000",
+				"transition": "background-color 0.5s"
+				}
+			)
+			.bind('mouseenter', function(e) {
+							$(this).css("background-color", "#0ff");
+							return false;
+						}
+			)
+			.bind('mouseleave', function(e) {
+							$(this).css("background-color", "#ff0");
+							return false;
+						}
+			)
+			.text("<-");
+
+		$("<div>").appendTo($("#lines-wrap"))
+			.attr("id", "lines-button5")
+			.css({
+				"display": "inline-block",
+				"vertical-align": "top",
+				"line-height": "1.8rem",
+				"text-align": "center",
+				"font-size": "1.0rem",
+				"font-weight": "bold",
+				"width": "3.0rem",
+				"height": "2.0rem",
+				"background-color": "#ff0",
+				"color": "#000",
+				"transition": "background-color 0.5s"
+				}
+			)
+			.bind('mouseenter', function(e) {
+							$(this).css("background-color", "#0ff");
+							return false;
+						}
+			)
+			.bind('mouseleave', function(e) {
+							$(this).css("background-color", "#ff0");
+							return false;
+						}
+			)
+			.text("+>");
 
 		$target_area.bind('click.jimmy-editor_lines_showbox', function(e) {
 	
@@ -375,7 +429,6 @@
 				}
 			}
 
-			$('#lines-input').val("L:C?");
 			var val = $target_area[0].value;
 			var cal = val.substr(0).split("\n");
 
@@ -397,7 +450,7 @@
 
 			dest += num_n;
 
-			// Needs to refocus to correct siting particular in post editor
+			// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
 			$target_area[0].selectionStart = dest;
 			$target_area[0].selectionEnd = dest;
 			$(window).scrollTop(0);
@@ -437,7 +490,7 @@
 			$target_area[0].selectionStart = 0;
 			$target_area[0].selectionEnd = 0;
 
-			// Needs to refocus to correct siting particular in post editor
+			// Need to refocus to correct siting particular in post editor
 			$(window).scrollTop(0);
 			$('#lines-input').focus();
 			$target_area[0].focus();
@@ -452,13 +505,69 @@
 			$target_area[0].selectionStart = val.length;
 			$target_area[0].selectionEnd = val.length;
 
-			// Needs to refocus to correct siting particular in post editor
+			// Need to refocus to correct siting particular in post editor
 			$(window).scrollTop(0);
 			$('#lines-input').focus();
 			$target_area[0].focus();
 
 			var cal = val.substr(0).split("\n");
 			$("#lines-text").text("L: " + cal.length + "\r\n" + "C: " + cal[cal.length - 1].length);
+
+			return false;
+		});
+
+		$('#lines-button4').bind('click.jimmy-editor_lines_addindent', function(e) {
+			if( $target_area[0].selectionStart !== $target_area[0].selectionEnd ) {
+				var val = $target_area[0].value;
+				var sub_start = $target_area[0].selectionStart;
+				var sub_end = $target_area[0].selectionEnd;
+				var front_v = val.slice(0, sub_start);
+				var target_v = val.slice(sub_start, sub_end);
+				var rear_v = val.slice(sub_end);
+				target_v = target_v.replace(/^(?:\t)(.+)/mg, '$1');
+
+				// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
+				$target_area[0].selectionStart = sub_start;
+				$target_area[0].selectionEnd = sub_start;
+				$(window).scrollTop(0);
+				$('#lines-input').focus();
+				$target_area[0].focus();
+
+				$target_area[0].value= front_v + target_v + rear_v;
+
+				$target_area[0].selectionStart = sub_start;
+				$target_area[0].selectionEnd = sub_start + target_v.length;
+
+				$target_area.trigger('click.jimmy-editor_lines_showbox');
+			}
+
+			return false;
+		});
+
+		$('#lines-button5').bind('click.jimmy-editor_lines_addindent', function(e) {
+			if( $target_area[0].selectionStart !== $target_area[0].selectionEnd ) {
+				var val = $target_area[0].value;
+				var sub_start = $target_area[0].selectionStart;
+				var sub_end = $target_area[0].selectionEnd;
+				var front_v = val.slice(0, sub_start);
+				var target_v = val.slice(sub_start, sub_end);
+				var rear_v = val.slice(sub_end);
+				target_v = target_v.replace(/^(.+)/mg, '\t$1');
+
+				// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
+				$target_area[0].selectionStart = sub_start;
+				$target_area[0].selectionEnd = sub_start;
+				$(window).scrollTop(0);
+				$('#lines-input').focus();
+				$target_area[0].focus();
+
+				$target_area[0].value= front_v + target_v + rear_v;
+
+				$target_area[0].selectionStart = sub_start;
+				$target_area[0].selectionEnd = sub_start + target_v.length;
+
+				$target_area.trigger('click.jimmy-editor_lines_showbox');
+			}
 
 			return false;
 		});
@@ -691,9 +800,6 @@
 						the_select_flag = 1;
 						$("#search-text").text("Replace");
 					} else if (the_select_flag === 1) {
-						the_select_flag = 2;
-						$("#search-text").text("Delete");
-					} else if (the_select_flag === 2) {
 						the_select_flag = 0;
 						$("#search-text").text("Search");
 					}
@@ -714,7 +820,7 @@
 					"id": "search-input1",
 					"class": "search-input",
 					"type": "text",
-					"value": "Search?"
+					"placeholder": "Search?"
 					}
 				)
 				.css({
@@ -728,10 +834,6 @@
 					"height": "2.0rem",
 					"background-color": "#fff",
 					"color": "#000"
-					}
-				)
-				.click( function() {
-						$(".search-input").val([]);
 					}
 				)
 				.appendTo($("#search-wrap"));
@@ -740,7 +842,7 @@
 					"id": "search-input2",
 					"class": "search-input",
 					"type": "text",
-					"value": "Replace?"
+					"placeholder": "Replace?"
 					}
 				)
 				.css({
@@ -754,10 +856,6 @@
 					"height": "2.0rem",
 					"background-color": "#fff",
 					"color": "#000"
-					}
-				)
-				.click( function() {
-						$("#search-input2").val([]);
 					}
 				)
 				.appendTo($("#search-wrap"));
@@ -772,10 +870,10 @@
 				"text-align": "center",
 				"font-size": "1.0rem",
 				"font-weight": "bold",
-				"width": "3.0rem",
+				"width": "2.0rem",
 				"height": "2.0rem",
 				"background-color": "#ff0",
-				"color": "#AAA",
+				"color": "#aaa",
 				"border-bottom": "1px solid #aaa",
 				"transition": "background-color 0.5s"
 				}
@@ -786,7 +884,7 @@
 						$(this).css("color", "#000");
 					} else if (the_i_flag === true) {
 						the_i_flag = false;
-						$(this).css("color", "#AAA");
+						$(this).css("color", "#aaa");
 					}
 				}
 			)
@@ -812,10 +910,10 @@
 				"text-align": "center",
 				"font-size": "1.0rem",
 				"font-weight": "bold",
-				"width": "3.0rem",
+				"width": "2.0rem",
 				"height": "2.0rem",
 				"background-color": "#ff0",
-				"color": "#AAA",
+				"color": "#aaa",
 				"border-bottom": "1px solid #aaa",
 				"transition": "background-color 0.5s"
 				}
@@ -826,7 +924,7 @@
 						$(this).css("color", "#000");
 					} else if (the_m_flag === true) {
 						the_m_flag = false;
-						$(this).css("color", "#AAA");
+						$(this).css("color", "#aaa");
 					}
 				}
 			)
@@ -841,6 +939,47 @@
 						}
 			)
 			.text("m");
+
+		var the_g_flag = false;
+		$("<div>").appendTo($("#search-wrap"))
+			.attr("id", "search-button6")
+			.css({
+				"display": "inline-block",
+				"vertical-align": "top",
+				"line-height": "1.8rem",
+				"text-align": "center",
+				"font-size": "1.0rem",
+				"font-weight": "bold",
+				"width": "2.0rem",
+				"height": "2.0rem",
+				"background-color": "#ff0",
+				"color": "#aaa",
+				"border-bottom": "1px solid #aaa",
+				"transition": "background-color 0.5s"
+				}
+			)
+			.click( function() {
+					if (the_g_flag === false) {
+						the_g_flag = true;
+						$(this).css("color", "#000");
+					} else if (the_g_flag === true) {
+						the_g_flag = false;
+						$(this).css("color", "#aaa");
+					}
+				}
+			)
+			.bind('mouseenter', function(e) {
+							$(this).css("background-color", "#0ff");
+							return false;
+						}
+			)
+			.bind('mouseleave', function(e) {
+							$(this).css("background-color", "#ff0");
+							return false;
+						}
+			)
+			.text("g");
+
 
 		$("<div>").appendTo($("#search-wrap"))
 			.attr("id", "search-button2")
@@ -883,7 +1022,7 @@
 				"width": "3.0rem",
 				"height": "2.0rem",
 				"background-color": "#ff0",
-				"color": "#AAA",
+				"color": "#aaa",
 				"transition": "background-color 0.5s"
 				}
 			)
@@ -905,11 +1044,11 @@
 			// Clear Existing Array for back
 			the_past.length = 0;
 			the_bt3_backcol_hover = "#ff0";
-			$("#search-button3").css("color", "#AAA");
+			$("#search-button3").css("color", "#aaa");
 			return false;	
 		});
 
-		// Variable the_nextstart uses for search/replace/delete
+		// Variable the_nextstart uses for search/ replace
 		var the_nextstart = 0;
 		var the_val_search = "";
 		var the_search_regex = {};
@@ -927,7 +1066,7 @@
 				the_nextstart = $target_area[0].selectionStart;
 			}
 
-			// If Caret is moved after search/replace/delete
+			// If Caret is moved after search/ replace
 			if (the_nextstart !== $target_area[0].selectionEnd) {
 				the_nextstart = $target_area[0].selectionStart;
 			}
@@ -938,173 +1077,118 @@
 			}		
 
 			var val = $target_area[0].value;
+			var modi = "";
+			if (the_m_flag === true) {
+				modi = modi + "m";
+			}
+			if (the_i_flag === true) {
+				modi = modi + "i";
+			}
+			if (the_g_flag === true) {
+				modi = modi + "g";
+			}
+			// Make RegExp
+			the_search_regex = new RegExp(the_val_search, modi);
 
-			if (the_val_replace !== "" && the_select_flag === 1) {
+			if (the_select_flag === 1) {
 			// Replace
-				// Make RegExp
-				var modi = "";
-				if (the_m_flag === true) {
-					modi = modi + "m";
-				}
-				if (the_i_flag === true) {
-					modi = modi + "i";
-				}
-				the_search_regex = new RegExp(the_val_search, modi);
-
-				// Check the last action
-				if (the_past[the_past.length - 1] === -1) {
-					the_nextstart = $target_area[0].selectionStart;
-				}
-
-				// The main lines to replace
-				var cal = val.substr(the_nextstart).search(the_search_regex);
-				if (cal === -1) {
-					//Back to Start
-					cal = val.substr(0).search(the_search_regex);
-					the_nextstart = 0;
+				if (the_g_flag === true) {
+					var cal = val.search(the_search_regex);
 					if (cal === -1) {
-						$target_area[0].focus();
 						return false;
+					} else {
+						// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
+						$target_area[0].selectionStart = 0;
+						$target_area[0].selectionEnd = 0;
+						$(window).scrollTop(0);
+						$('#search-input1').focus();
+						$target_area[0].focus();
+						
+						$target_area[0].value = val.replace(the_search_regex, the_val_replace);
+						the_nextstart = $target_area[0].value.length;
+						$target_area[0].selectionStart = 0;
+						$target_area[0].selectionEnd = the_nextstart;
+
+						// Make memory limit
+						if (the_past.length > 117) {
+							for (var i = 0; i < 3 ; i++) {
+								the_past.shift();
+							}
+						}
+						the_past.push(-1);
+						the_past.push(val);
+						the_past.push(0);
 					}
-				}
-				cal += the_nextstart;
-
-				// Make memory limit
-				if (the_past.length > 117) {
-					for (var i = 0; i < 3 ; i++) {
-						the_past.shift();
+				} else {
+					// Check the last action
+					if (the_past[the_past.length - 1] === -1) {
+						the_nextstart = $target_area[0].selectionStart;
 					}
-				}
-				// Push previous select
-				the_past.push($target_area[0].selectionStart);
-				the_past.push($target_area[0].selectionEnd);
-				var temp_int = -1;
-				the_past.push(temp_int);
 
-				// Returns whole matched string on [0]
-				var mat = val.substr(the_nextstart).match(the_search_regex);
-
-				// Needs to refocus to correct siting particular in post editor
-				$target_area[0].selectionStart = cal;
-				$target_area[0].selectionEnd = cal;
-				$(window).scrollTop(0);
-				$('#search-input1').focus();
-				$target_area[0].focus();
-
-				var slice_p = cal + mat[0].length;
-				var front_v = val.slice(0, cal);
-				var rear_v = val.slice(slice_p);
-				// Replace Itself
-				$target_area[0].value = front_v + the_val_replace + rear_v;
-
-				the_nextstart = cal + the_val_replace.length;
-				$target_area[0].selectionStart = cal;
-				$target_area[0].selectionEnd = the_nextstart;
-
-				$target_area.trigger('click.jimmy-editor_lines_showbox');
-
-				// Make memory limit
-				if (the_past.length > 117) {
-					for (var i = 0; i < 3 ; i++) {
-						the_past.shift();
+					// The main lines to replace
+					var cal = val.substr(the_nextstart).search(the_search_regex);
+					if (cal === -1) {
+						//Back to Start
+						cal = val.substr(0).search(the_search_regex);
+						the_nextstart = 0;
+						if (cal === -1) {
+							$target_area[0].focus();
+							return false;
+						}
 					}
+					cal += the_nextstart;
+
+					// Make memory limit
+					if (the_past.length > 117) {
+						for (var i = 0; i < 3 ; i++) {
+							the_past.shift();
+						}
+					}
+					// Push previous select
+					the_past.push($target_area[0].selectionStart);
+					the_past.push($target_area[0].selectionEnd);
+					var temp_int = -1;
+					the_past.push(temp_int);
+
+					// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
+					$target_area[0].selectionStart = cal;
+					$target_area[0].selectionEnd = cal;
+					$(window).scrollTop(0);
+					$('#search-input1').focus();
+					$target_area[0].focus();
+
+					// Returns whole matched string on [0]
+					var mat = val.substr(the_nextstart).match(the_search_regex);
+					var slice_p = cal + mat[0].length;
+					var front_v = val.slice(0, cal);
+					var rear_v = val.slice(slice_p);
+					// Replace Itself
+					$target_area[0].value = front_v + val.substr(cal).replace(the_search_regex, the_val_replace);
+
+					val = $target_area[0].value;
+					var reverse_leng = rear_v.length * -1;
+					var replace_act = val.slice(front_v.length, reverse_leng);
+
+					the_nextstart = cal + replace_act.length;
+					$target_area[0].selectionStart = cal;
+					$target_area[0].selectionEnd = the_nextstart;
+					
+					// Make memory limit
+					if (the_past.length > 117) {
+						for (var i = 0; i < 3 ; i++) {
+							the_past.shift();
+						}
+					}
+					the_past.push(cal);
+					the_past.push(mat[0]);
+					the_past.push(replace_act);
 				}
-				the_past.push(cal);
-				the_past.push(mat[0]);
-				the_past.push(the_val_replace);
+
 				the_bt3_backcol_hover = "#0ff";
 				$("#search-button3").css("color", "#000");
-
-				return false;
-			} else if (the_val_replace === "" && the_select_flag === 2) {
-			// Delete
-				// Make RegExp
-				var modi = "";
-				if (the_m_flag === true) {
-					modi = modi + "m";
-				}
-				if (the_i_flag === true) {
-					modi = modi + "i";
-				}
-				the_search_regex = new RegExp(the_val_search, modi);
-
-				// Check the last action
-				if (the_past[the_past.length - 1] === -1) {
-					the_nextstart = $target_area[0].selectionStart;
-				}
-
-				// The main lines to delete
-				var cal = val.substr(the_nextstart).search(the_search_regex);
-				if (cal === -1) {
-					//Back to Start
-					cal = val.substr(0).search(the_search_regex);
-					the_nextstart = 0;
-					if (cal === -1) {
-						$target_area[0].focus();
-						return false;
-					}
-				}
-				cal += the_nextstart;
-
-				// Make memory limit
-				if (the_past.length > 117) {
-					for (var i = 0; i < 3 ; i++) {
-						the_past.shift();
-					}
-				}
-				// Push previous select
-				the_past.push($target_area[0].selectionStart);
-				the_past.push($target_area[0].selectionEnd);
-				var temp_int = -1;
-				the_past.push(temp_int);
-
-				// Returns whole matched string on [0]
-				var mat = val.substr(the_nextstart).match(the_search_regex);
-
-				// Needs to refocus to correct siting particular in post editor
-				$target_area[0].selectionStart = cal;
-				$target_area[0].selectionEnd = cal;
-				$(window).scrollTop(0);
-				$('#search-input1').focus();
-				$target_area[0].focus();
-
-				var slice_p = cal + mat[0].length;
-				var front_v = val.slice(0, cal);
-				var rear_v = val.slice(slice_p);
-				// Replace Itself
-				$target_area[0].value = front_v + rear_v;
-
-				the_nextstart = cal;
-				$target_area[0].selectionStart = cal;
-				$target_area[0].selectionEnd = the_nextstart;
-
-				$target_area.trigger('click.jimmy-editor_lines_showbox');
-
-				// Make memory limit
-				if (the_past.length > 117) {
-					for (var i = 0; i < 3 ; i++) {
-						the_past.shift();
-					}
-				}
-				the_past.push(cal);
-				the_past.push(mat[0]);
-				the_past.push("");
-				the_bt3_backcol_hover = "#0ff";
-				$("#search-button3").css("color", "#000");
-
-				return false;
+			
 			} else if (the_select_flag === 0) {
 			// Search
-				// Make RegExp
-				var modi = "";
-				if (the_m_flag === true) {
-					modi = modi + "m";
-				}
-				if (the_i_flag === true) {
-					modi = modi + "i";
-				}
-				the_search_regex = new RegExp(the_val_search, modi);
-
 				// The main lines to search
 				var cal = val.substr(the_nextstart).search(the_search_regex);
 				if (cal === -1) {
@@ -1132,10 +1216,7 @@
 				the_bt3_backcol_hover = "#0ff";
 				$("#search-button3").css("color", "#000");
 
-				// Returns whole matched string on [0]
-				var mat = val.substr(the_nextstart).match(the_search_regex);
-
-				// Needs to refocus to correct siting particular in post editor
+				// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = cal;
 				$(window).scrollTop(0);
@@ -1148,16 +1229,16 @@
 				$target_area[0].value = front_v + " " + rear_v;
 				$target_area[0].value = front_v + rear_v;
 
+				// Returns whole matched string on [0]
+				var mat = val.substr(the_nextstart).match(the_search_regex);
 				the_nextstart = cal + mat[0].length;
 				$target_area[0].selectionStart = cal;
 				$target_area[0].selectionEnd = the_nextstart;
 
-				$target_area.trigger('click.jimmy-editor_lines_showbox');
-
-				return false;
 			}
 
-			$target_area[0].focus();
+			$target_area.trigger('click.jimmy-editor_lines_showbox');
+
 			return false;
 		});
 
@@ -1181,33 +1262,50 @@
 			var back_search = the_past.pop();
 			var cal = the_past.pop();
 
-			// Needs to refocus to correct siting particular in post editor
-			$target_area[0].selectionStart = cal;
-			$target_area[0].selectionEnd = cal;
-			$(window).scrollTop(0);
-			$('#search-input1').focus();
-			$target_area[0].focus();
+			if (cal === -1) {
+			// If it was all replace
+				// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
+				$target_area[0].selectionStart = 0;
+				$target_area[0].selectionEnd = 0;
+				$(window).scrollTop(0);
+				$('#search-input1').focus();
+				$target_area[0].focus();
 
-			if ( back_replace === -1) {
-			// If it was search, or pre replace and delete
-				$target_area[0].selectionStart = cal;
-				$target_area[0].selectionEnd = back_search;
-			} else {
-			// If it was replace and delete
-				var val = $target_area[0].value;
-				var slice_p = cal + back_replace.length;
-				var front_v = val.slice(0, cal);
-				var rear_v = val.slice(slice_p);
-
-				$target_area[0].value = front_v + back_search + rear_v;
-				the_nextstart = cal + back_search.length;
-				$target_area[0].selectionStart = cal;
+				$target_area[0].value = back_search;
+				the_nextstart = 0;
+				$target_area[0].selectionStart = the_nextstart;
 				$target_area[0].selectionEnd = the_nextstart;
+
+			} else {
+				// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
+				$target_area[0].selectionStart = cal;
+				$target_area[0].selectionEnd = cal;
+				$(window).scrollTop(0);
+				$('#search-input1').focus();
+				$target_area[0].focus();
+
+				if (back_replace !== -1) {
+				// If it was replace
+					var val = $target_area[0].value;
+					var slice_p = cal + back_replace.length;
+					var front_v = val.slice(0, cal);
+					var rear_v = val.slice(slice_p);
+					$target_area[0].value = front_v + back_search + rear_v;
+					the_nextstart = cal + back_search.length;
+					$target_area[0].selectionStart = cal;
+					$target_area[0].selectionEnd = the_nextstart;
+				} else {
+				// If it was search
+					the_nextstart = cal;
+					$target_area[0].selectionStart = cal;
+					$target_area[0].selectionEnd = back_search;
+				}
+
 			}
 
 			if (the_past.length === 0) {
 				the_bt3_backcol_hover = "#ff0";
-				$("#search-button3").css("color", "#AAA");
+				$("#search-button3").css("color", "#aaa");
 			}
 
 			$target_area.trigger('click.jimmy-editor_lines_showbox');
@@ -1441,7 +1539,7 @@
 					"id": "style-input1",
 					"class": "style-input",
 					"type": "text",
-					"value": font_color
+					"placeholder": font_color
 					}
 				)
 				.css({
@@ -1455,10 +1553,6 @@
 					"height": "2.0rem",
 					"background-color": "#fff",
 					"color": "#000"
-					}
-				)
-				.click( function() {
-						$("#style-input1").val([]);
 					}
 				)
 				.appendTo($("#style-wrap"));
@@ -1468,7 +1562,7 @@
 					"id": "style-input2",
 					"class": "style-input",
 					"type": "text",
-					"value": font_params
+					"placeholder": font_params
 					}
 				)
 				.css({
@@ -1482,10 +1576,6 @@
 					"height": "2.0rem",
 					"background-color": "#fff",
 					"color": "#000"
-					}
-				)
-				.click( function() {
-						$("#style-input2").val([]);
 					}
 				)
 				.appendTo($("#style-wrap"));
@@ -1495,7 +1585,7 @@
 					"id": "style-input3",
 					"class": "style-input",
 					"type": "text",
-					"value": back_color
+					"placeholder": back_color
 					}
 				)
 				.css({
@@ -1509,10 +1599,6 @@
 					"height": "2.0rem",
 					"background-color": "#fff",
 					"color": "#000"
-					}
-				)
-				.click( function() {
-						$("#style-input3").val([]);
 					}
 				)
 				.appendTo($("#style-wrap"));
@@ -1591,9 +1677,9 @@
  			window.sessionStorage.setItem("weight-" + order_num, $target_area.css("font-weight"));
  			window.sessionStorage.setItem("backcol-" + order_num, $target_area.css("background-color"));
 
-			$('#style-input1').val($target_area.css("color"));
-			$('#style-input2').val($target_area.css("font-size") + ":" + $target_area.css("font-weight"));
-			$('#style-input3').val($target_area.css("background-color"));
+			$('#style-input1').attr('placeholder', $target_area.css("color"));
+			$('#style-input2').attr('placeholder', $target_area.css("font-size") + ":" + $target_area.css("font-weight"));
+			$('#style-input3').attr('placeholder', $target_area.css("background-color"));
 
 			$target_area[0].focus();
 

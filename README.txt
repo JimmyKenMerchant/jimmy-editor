@@ -12,7 +12,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-The suggestion that you can have freedom of making Web Browser Based Applications (Web Apps). Movable Graphical Interfaces in Web browsers, I called it as "Sticker Box", makes your plot for Web Apps to be layout free and improve its usability. In this plugin, "Sticker Box" is used as a bunch of editor tools, "Lines Box", "Search Box" and "Style Box". This tools gives you how well "Sticker Box" works in Web browsers.
+Regular Expression Search and Replace on WordPress Editor. Plus, it's a suggestion that you can have freedom of making Web Browser Based Applications (Web Apps). Movable Graphical Interfaces in Web browsers, I called it as "Sticker Box", makes your plot for Web Apps to be layout free and improve its usability. In this plugin, "Sticker Box" is used as a bunch of editor tools, "Lines Box", "Search Box" and "Style Box". This tools gives you how well "Sticker Box" works in Web browsers.
 
 = Instruction =
 
@@ -60,24 +60,26 @@ Touch or click "Top" to take your caret to the top of your text area.
 
 Touch or click "Last" to take your caret to the bottom of your text area.
 
+Select the range of the text, then touch or click "+>" to insert tab indent.
+
+Select the range of the text, then touch or click "<-" to reduce tab indent.
+
 
 III. Search Box
 
-Change Command by touching or clicking "Select" which toggles "Search", "Replace", "Delete".
+Change Command by touching or clicking "Select" which toggles "Search" and "Replace".
 
 On "Search": Type your target word on the "Search?" White Label.
 
-On "Replace": Type your target word on the "Search?" White Label, your demand word on the "Replace?".
+On "Replace": Type your target word on the "Search?" White Label, your demand word on the "Replace?". If you want to delete a word, make sure not to type any word on the "Replace?".
 
-On "Delete": Type your target word on the "Search?" White Label, make sure to empty on the "Replace?".
-
-Because your target word is based on Regular Expression, in several cases, you need to write the word with the rule of Regular Expression, e.g., if you want search "*", write it with escape character such as "\*", and if you want search two spaces, write "\s\s". Also see below described for Regular Expression.
+Because your target word is based on Regular Expression, in several cases, you need to write the word with the rule of Regular Expression, e.g., if you want search "*", write it with escape character such as "\*", and if you want search two spaces, write "\s\s". Also see below described for Regular Expression. Back reference can be used.
 
 Then touch or click "Go" or press Enter.
 
 If "Back" is active, you can undo these commands. "Back" is only up to 40 times because of saving memory loading. Replacing and Deleting reduce the limit of storing memory for "Back". If you click or touch your text area, "Back" is deactivated and cleaned past activities.
 
-This Search Box is searching the word by JavaScript's Regular Expression. Type your search word by the rule of Regular Expression without delimiters, and select "m" (multi-lines modifier for use "^", "$" on each lines), and/or "i" (ignore cases). "g" is never be used because this modifier for all replacing words on one time [String.prototype.replace()], or get all matching words on one time [String.prototype.match()].
+This Search Box is searching the word by JavaScript's Regular Expression. Type your search word by the rule of Regular Expression without delimiters, and select "m" (multi-lines modifier for use "^", "$" on each lines), "i" (ignore cases), and/or "g" (global).
 
 
 IV. Style Box
@@ -121,6 +123,11 @@ Please upgrade because of fixing bugs.
 == Changelog ==
 
 This Changelog is including results of compatibility tests. These tests assume latest versions of Web Browsers as of the date written in each log, if additional version information doesn't been added to each name.
+
+= 1.0.2 =
+* Modified Search Box to make Regular Expression become enable to use back reference and to use "g" mode modifier
+* Added tab indent functions to Lines Box
+* Confirmed that pre-selecting is needed in case of ranged selecting of the text to scroll correctly on Lines Box and Search Box
 
 = 1.0.1 =
 * Fixed Bug that when you want to replace some word which includes the target word; particularly, replacing stops
