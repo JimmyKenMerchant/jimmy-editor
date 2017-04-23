@@ -1095,6 +1095,7 @@
 				if (the_g_flag === true) {
 					var cal = val.search(the_search_regex);
 					if (cal === -1) {
+						$target_area[0].focus();
 						return false;
 					} else {
 						// Need to pre-select and refocus to scroll correctly in case of ranged selecting of the text
