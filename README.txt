@@ -6,7 +6,7 @@ Tags: editor, admin, administrator, customize, post, theme, plugin
 Author: Kenta Ishii
 Author URI: http://electronics.jimmykenmerchant.com
 Requires at least: 4.7.3
-Tested up to: 4.7.3
+Tested up to: 4.7.4
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,11 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
+
+== Screenshots ==
+1. Displaying Lines and Columns on Lines Box with folded "Sticker Box".
+2. Using of Search Box with Regular Expression, "/load.*/i".
+3. Using of inserting tab indents to selected lines on Lines Box.
 
 == Installation ==
 
@@ -113,12 +118,12 @@ I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Device. In t
 
 = What will you do here in the future? =
 
-I'm thinking of making another editor in this plugin. This would be embedded to default editor. If you have some curious, please note in the support forum of this plugin.
+I'm thinking of colorful editor in this plugin. This would be embedded to default editor. Absolutely, it would be depend on a renowned HTML5 "contenteditable" attribute to "div" and tag replacing technique of jQuery. If you have some curious, please note it in the support forum of this plugin.
 
 == Upgrade Notice ==
 
 = 1.0.2 =
-Please upgrade because of fixing bugs.
+Please upgrade because of fixing bugs and having new futures.
 
 == Changelog ==
 
@@ -127,7 +132,8 @@ This Changelog is including results of compatibility tests. These tests assume l
 = 1.0.2 =
 * Modified Search Box to make Regular Expression become enable to use back reference and to use "g" mode modifier
 * Added tab indent functions to Lines Box
-* Confirmed that pre-selecting is needed in case of ranged selecting of the text to scroll correctly on Lines Box and Search Box
+* Confirmed pre-selecting (no ranged) is needed to scroll correctly on Lines Box and Search Box, in case of ranged selecting of the text with the function.
+: April 24, 2017
 
 = 1.0.1 =
 * Fixed Bug that when you want to replace some word which includes the target word; particularly, replacing stops
