@@ -44,7 +44,7 @@ GNU General Public License for more details.
 
 From "Plugins" of your admin page, just search and install "Jimmy Editor". Make sure to activate "Jimmy Editor" in "Installed Plugins", a "Plugins" sub menu.
 
-You can download and test the latest version of this plugin from GitHub public repository. https://github.com/JimmyKenMerchant/jimmy-editor/
+You can download and test the latest version of this plugin from GitHub public repository. <https://github.com/JimmyKenMerchant/jimmy-editor/>
 
 In my experience, wp_enqueue_script where deps as array('jquery') was wrong for adding scripts of jQuery on both the normal page and the admin page. By typing "true" on the last argument of wp_enqueue_script, the script will be on the footer. This may be good for your scripts of jQuery because jQuery usually handles HTML DOM (Document Object Model) which needs to be loaded.
 
