@@ -6,8 +6,8 @@ Tags: editor, admin, administrator, customize, post, theme, plugin
 Author: Kenta Ishii
 Author URI: http://electronics.jimmykenmerchant.com
 Requires at least: 4.7
-Tested up to: 4.8
-Stable tag: 1.0.3
+Tested up to: 4.9
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,12 +121,17 @@ I tested this plugin on Linux PC, Windows 10 PC, and Android Mobile Device. In t
 I'm thinking of colorful editor in this plugin. This would be embedded to default editor. Absolutely, it would be depend on a renowned HTML5 "contenteditable" attribute to "div" and tag replacing technique of jQuery. If you have some curious, please note it in the support forum of this plugin.
 
 == Upgrade Notice ==
-= 1.0.3 =
-Please upgrade because of fixing bugs and having new futures: Confirmed Compatibility with WordPress Version 4.8.
+= 1.0.4 =
+Please upgrade because of fixing bugs and having new futures: Confirmed Compatibility with WordPress Version 4.9.
 
 == Changelog ==
 
 This Changelog is including results of compatibility tests. These tests assume latest versions of Web Browsers as of the date written in each log, if additional version information doesn't been added to each name.
+
+= 1.0.4 =
+* Confirmed Compatibility with WordPress Version 4.9
+* WordPress 4.9 modified editors of plugins and themes. If you want Jimmy Editor in editors of both, check "Disable syntax highlighting when editing code" on Profile.
+: April 26, 2018
 
 = 1.0.3 =
 * Confirmed Compatibility with WordPress Version 4.8
